@@ -1,6 +1,8 @@
 package es.esy.ladysnake.gui;
 
 import es.esy.ladysnake.miniprojet.MiniProjet;
+import java.util.List;
+import java.util.ArrayList;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -44,6 +46,11 @@ public class Interface {
 	static final class Frame extends JFrame implements ActionListener, KeyListener {
 
 		private static final long serialVersionUID = -2280547253170432552L;
+		private static List<CommandListener> listeners = new ArrayList<CommandListener>();
+
+		public void addListener(CommandListener toAdd){
+			listeners.add(toAdd);
+		}
 
 		JPanel panel;
 		JButton downloadButton;
@@ -109,21 +116,22 @@ public class Interface {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String s = urlField.getText();
-			String[] commande;
-	    int index = 0;
-	    do{
-	      index = s.indexOf(';', index+1);
-	      log("i" + index);
-	      for(String com : allCommandes) {
-	        if(s.contains(com)){
-	          //log(s.indexOf(com) + " " + com.length() + " " + index);
-	          try{
-	            arg = s.substring(s.indexOf(com) + com.length(), index);
-	          } catch(StringIndexOutOfBoundsException e){}
-	        }
-	      }
-	    } while(index < s.lastIndexOf(';'));
-			MiniProjet.commandEntered(urlField.getText());
+			ArrayList<String> commande = new ArrayList<String>();
+	    int index = 0, argIndex = 0;
+	    //do {
+				commande.clear();
+				argIndex = s.indexOf(' ', index);
+				if(argIndex > 0){
+					commande.set(0, s.substring(index, argIndex));
+		      index = s.indexOf(';', index+1);
+					do {
+						commande.add(s.substring(s.indexOf(' ', argIndex)));
+						argIndex = s.indexOf(' ', argIndex+1);
+					} while(argIndex < index);
+				} else commande.set(0, s.substring(0, s.indexOf(';')));
+				for(CommandListener l1 : listeners)
+					l1.commandEntered((String[])commande.toArray());
+	    //} while(index < s.lastIndexOf(';'));
 			urlField.setText("");
 		}
 
@@ -131,4 +139,8 @@ public class Interface {
 		@Override public void keyReleased(KeyEvent e) { }
 	}
 
+}
+
+interface CommandListener {
+	void commandEntered(String[] commande);
 }

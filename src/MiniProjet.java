@@ -20,7 +20,7 @@ public class MiniProjet {
   }
 
   public static void commandEntered(String[] s) {
-    switch(s){
+    switch(s[0]){
       case "help": log("lol"); break;
       case "clear": log("mdr"); break;
       case "exit": log("wesh"); break;
