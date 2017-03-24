@@ -31,4 +31,8 @@ public class Vaisseau {
         equipage.remove(m);
     }
   }
+
+  public String toString() {
+    return this.nom + "\n" + afficherEquipage();
+  }
 }

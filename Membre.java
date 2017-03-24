@@ -8,4 +8,8 @@ public class Membre {
     this.sexe = s;
     this.grade = g;
   }
+
+  public String toString() {
+    return "nom:" + this.nom + " sexe:" + this.sexe + " grade:" + this.grade;
+  }
 }

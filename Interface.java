@@ -106,7 +106,7 @@ public class Interface {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			TD6.commandEntered(urlField.getText());
+			MiniProjet.commandEntered(urlField.getText());
 			urlField.setText("");
 		}
 
