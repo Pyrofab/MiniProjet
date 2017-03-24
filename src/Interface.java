@@ -1,6 +1,5 @@
 package es.esy.ladysnake.gui;
 
-import es.esy.ladysnake.miniprojet.MiniProjet;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -26,18 +25,46 @@ import javax.swing.text.DefaultCaret;
 public class Interface {
 
 	private static Frame frame;
-
+	private static List<CommandListener> listeners = new ArrayList<CommandListener>();
+	
+	/**
+	 * Adds the object to the interface's listeners
+	 */
+	public static void addCommandListener(CommandListener toAdd){
+			listeners.add(toAdd);
+	}
+	
+	/**
+	 * Open the interface
+	 */
 	public static void openInterface(String title, String buttonTitle, String labelText) {
 		frame = new Frame(title, buttonTitle, labelText);
 	}
 
+	/**
+	 * Add a line to the log area
+	 * @param s the String to display
+	 */
 	public static void addLogLine(String s) {
 		if(frame != null) {
 			String currText = frame.logArea.getText();
 			frame.logArea.setText(currText.isEmpty() ? s : (currText + "\n" + s));
 		}
 	}
-
+	
+	/**
+	 * Clear the log area
+	 */
+	public static void clear(){
+		if(frame != null) {
+			frame.logArea.setText("");
+		}
+	}
+	
+	/**
+	 * Changes the status displayed at the bottom of the interface
+	 * @param status the status to display
+	 */
 	public static void setStatus(String status) {
 		if(frame != null)
 			frame.currentStatus.setText(status);
@@ -46,17 +73,12 @@ public class Interface {
 	static final class Frame extends JFrame implements ActionListener, KeyListener {
 
 		private static final long serialVersionUID = -2280547253170432552L;
-		private static List<CommandListener> listeners = new ArrayList<CommandListener>();
-
-		public void addListener(CommandListener toAdd){
-			listeners.add(toAdd);
-		}
 
 		JPanel panel;
 		JButton downloadButton;
 		JLabel label;
 		JScrollPane scrollPane;
-		JTextField urlField;
+		JTextField commandField;
 		JTextArea logArea;
 		JLabel currentStatus;
 
@@ -67,7 +89,7 @@ public class Interface {
 			panel = new JPanel();
 			downloadButton = new JButton(buttonTitle);
 			label = new JLabel(labelText);
-			urlField = new JTextField("", 54);
+			commandField = new JTextField("", 54);
 
 			logArea = new JTextArea(34, 68);
 			logArea.setBackground(Color.WHITE);
@@ -80,7 +102,7 @@ public class Interface {
 			currentStatus = new JLabel("Idle", SwingConstants.LEFT);
 
 			panel.add(label);
-			panel.add(urlField);
+			panel.add(commandField);
 			panel.add(downloadButton);
 			panel.add(scrollPane);
 			panel.add(currentStatus);
@@ -88,7 +110,7 @@ public class Interface {
 
 			downloadButton.requestFocus();
 			downloadButton.addActionListener(this);
-			urlField.addKeyListener(this);
+			commandField.addKeyListener(this);
 
 			addWindowListener(new WindowAdapter() {
 				@Override
@@ -115,32 +137,27 @@ public class Interface {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String s = urlField.getText();
+			String s = commandField.getText();
+			if(s.isEmpty() || s.indexOf(';') < 0)
+				return;
 			ArrayList<String> commande = new ArrayList<String>();
-	    int index = 0, argIndex = 0;
-	    //do {
-				commande.clear();
-				argIndex = s.indexOf(' ', index);
-				if(argIndex > 0){
-					commande.set(0, s.substring(index, argIndex));
-		      index = s.indexOf(';', index+1);
-					do {
-						commande.add(s.substring(s.indexOf(' ', argIndex)));
-						argIndex = s.indexOf(' ', argIndex+1);
-					} while(argIndex < index);
-				} else commande.set(0, s.substring(0, s.indexOf(';')));
+			int index = 0, argIndex = 0;
+			do {
+				argIndex = index;
+				index = s.indexOf(';', index) + 1;
+				while(s.indexOf(' ', argIndex) < index && s.indexOf(' ', argIndex) >= 0){
+					commande.add(s.substring(argIndex, s.indexOf(' ', argIndex)));
+					argIndex = s.indexOf(' ', argIndex) + 1;
+				}
+				commande.add(s.substring(argIndex, index - 1));
 				for(CommandListener l1 : listeners)
-					l1.commandEntered((String[])commande.toArray());
-	    //} while(index < s.lastIndexOf(';'));
-			urlField.setText("");
+					l1.commandEntered(commande);
+			} while (index < s.lastIndexOf(';'));
+			commandField.setText("");
 		}
 
 		@Override public void keyPressed(KeyEvent e) {  }
 		@Override public void keyReleased(KeyEvent e) { }
 	}
 
-}
-
-interface CommandListener {
-	void commandEntered(String[] commande);
 }

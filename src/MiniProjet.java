@@ -1,16 +1,19 @@
 package es.esy.ladysnake.miniprojet;
 
 import es.esy.ladysnake.gui.Interface;
+import es.esy.ladysnake.gui.CommandListener;
 import java.util.ArrayList;
 
-public class MiniProjet {
+public class MiniProjet implements CommandListener{
   public static Flotte flotte;
   public static String[]
-    allCommandes = {"help", "clear", "exit", "AfficherFlotte"},
+    allCommandes = {"help", "clear", "exit", "print", "AfficherFlotte"},
     doc = {"1", "2", "3", "4"};
-
+	
+  public MiniProjet(){}
 
   public static void main(String[] args) {
+	Interface.addCommandListener(new MiniProjet());
     flotte = new Flotte();
     Interface.openInterface("Matrix Simulator mk3", "Commander", "Entrer une commande");
     Libere m = new Libere("Neo", 'm', "Lieutenant");
@@ -19,13 +22,15 @@ public class MiniProjet {
     flotte.ajouterVaisseau(v);
   }
 
-  public static void commandEntered(String[] s) {
-    switch(s[0]){
-      case "help": log("lol"); break;
-      case "clear": log("mdr"); break;
-      case "exit": log("wesh"); break;
-      case "AfficherFlotte": log(flotte.toString());
-      default: log("Commande non reconnue");
+  @Override
+  public void commandEntered(ArrayList<String> s) {
+    switch(s.get(0)){
+      case "help": for(String str : allCommandes) log(str); break;
+      case "clear": Interface.clear(); break;
+      case "exit": System.exit(0); break;
+	  case "print": for(String args : s.subList(1, s.size())) log(args); break; 
+      case "AfficherFlotte": log(flotte.toString()); break;
+      default: log(s.get(0) + " : commande non reconnue. Tapez 'help' pour avoir une liste des commandes disponibles");
     }
   }
 
