@@ -9,6 +9,10 @@ public class Membre {
     this.grade = g;
   }
 
+  public String getNom(){
+    return this.nom;
+  }
+
   public String toString() {
     return "nom:" + this.nom + " sexe:" + this.sexe + " grade:" + this.grade;
   }
