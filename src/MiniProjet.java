@@ -1,3 +1,7 @@
+package es.esy.ladysnake.miniprojet;
+
+import es.esy.ladysnake.gui.Interface;
+
 public class MiniProjet {
   public static Flotte flotte;
 

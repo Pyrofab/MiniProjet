@@ -1,4 +1,6 @@
-// package es.esy.ladysnake.interface;
+package es.esy.ladysnake.gui;
+
+import es.esy.ladysnake.miniprojet.MiniProjet;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;

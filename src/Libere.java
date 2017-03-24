@@ -1,3 +1,5 @@
+package es.esy.ladysnake.miniprojet;
+
 public class Libere extends Membre {
   private int nbTransferts;
 

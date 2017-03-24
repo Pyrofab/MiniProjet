@@ -1,3 +1,5 @@
+package es.esy.ladysnake.miniprojet;
+
 public class Membre {
   private String nom;
   private char sexe;

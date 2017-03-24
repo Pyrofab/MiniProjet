@@ -1,3 +1,5 @@
+package es.esy.ladysnake.miniprojet;
+
 import java.util.ArrayList;
 
 public class Vaisseau {
