@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Vaisseau {
   private String nom;
   private String type;
@@ -6,7 +8,7 @@ public class Vaisseau {
   public Vaisseau(String n, String t) {
     this.nom = n;
     this.type = t;
-    equipage = new ArrayList<Membre>;
+    equipage = new ArrayList<Membre>();
   }
 
   public void ajouterMembre(Membre m) {
@@ -33,6 +35,6 @@ public class Vaisseau {
   }
 
   public String toString() {
-    return this.nom + "\n" + afficherEquipage();
+    return this.nom + "(" + this.type + ")" + "\nEquipage:\n" + afficherEquipage() + "\n";
   }
 }

@@ -12,7 +12,7 @@ public class Flotte{
   }
 
   public String toString(){
-    String res = "Flotte:";
+    String res = "Votre flotte:\n";
     for(Vaisseau v : flotte){
       res += v.toString() + "\n";
     }
