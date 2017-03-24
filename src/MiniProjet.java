@@ -19,28 +19,14 @@ public class MiniProjet {
     flotte.ajouterVaisseau(v);
   }
 
-  public static void commandEntered(String s) {
-    String arg;
-    int index = 0;
-    do{
-      index = s.indexOf(';', index+1);
-      log("i" + index);
-      for(String com : allCommandes) {
-        if(s.contains(com)){
-          //log(s.indexOf(com) + " " + com.length() + " " + index);
-          try{
-            arg = s.substring(s.indexOf(com) + com.length(), index);
-          } catch(StringIndexOutOfBoundsException e){}
-          switch(com){
-            case "help": log("lol"); break;
-            case "clear": log("mdr"); break;
-            case "exit": log("wesh"); break;
-            case "AfficherFlotte": log(flotte.toString());
-            default: log("Commande non reconnue");
-          }
-        }
-      }
-    } while(index < s.lastIndexOf(';'));
+  public static void commandEntered(String[] s) {
+    switch(s){
+      case "help": log("lol"); break;
+      case "clear": log("mdr"); break;
+      case "exit": log("wesh"); break;
+      case "AfficherFlotte": log(flotte.toString());
+      default: log("Commande non reconnue");
+    }
   }
 
   public static void log(String s) {

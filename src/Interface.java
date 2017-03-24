@@ -108,6 +108,21 @@ public class Interface {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			String s = urlField.getText();
+			String[] commande;
+	    int index = 0;
+	    do{
+	      index = s.indexOf(';', index+1);
+	      log("i" + index);
+	      for(String com : allCommandes) {
+	        if(s.contains(com)){
+	          //log(s.indexOf(com) + " " + com.length() + " " + index);
+	          try{
+	            arg = s.substring(s.indexOf(com) + com.length(), index);
+	          } catch(StringIndexOutOfBoundsException e){}
+	        }
+	      }
+	    } while(index < s.lastIndexOf(';'));
 			MiniProjet.commandEntered(urlField.getText());
 			urlField.setText("");
 		}
