@@ -73,23 +73,28 @@ public class Interface {
 	static final class Frame extends JFrame implements ActionListener, KeyListener {
 
 		private static final long serialVersionUID = -2280547253170432552L;
+		private ArrayList<String> journal;
+		private int indiceJournal;
 
 		JPanel panel;
 		JButton confirmButton;
 		JLabel label;
 		JScrollPane scrollPane;
-		JTextField commandField;
+		JTextField inputField;
 		JTextArea logArea;
 		JLabel currentStatus;
 
 		public Frame(String title, String buttonTitle, String labelText) {
 			setSize(800, 640);
 			setTitle(title);
+			
+			journal = new ArrayList<String>();
+			indiceJournal = 0;
 
 			panel = new JPanel();
 			confirmButton = new JButton(buttonTitle);
 			label = new JLabel(labelText);
-			commandField = new JTextField("", 54);
+			inputField = new JTextField("", 54);
 
 			logArea = new JTextArea(34, 68);
 			logArea.setBackground(Color.WHITE);
@@ -102,7 +107,7 @@ public class Interface {
 			currentStatus = new JLabel("Idle", SwingConstants.LEFT);
 
 			panel.add(label);
-			panel.add(commandField);
+			panel.add(inputField);
 			panel.add(confirmButton);
 			panel.add(scrollPane);
 			panel.add(currentStatus);
@@ -110,7 +115,7 @@ public class Interface {
 
 			confirmButton.requestFocus();
 			confirmButton.addActionListener(this);
-			commandField.addKeyListener(this);
+			inputField.addKeyListener(this);
 
 			addWindowListener(new WindowAdapter() {
 				@Override
@@ -137,26 +142,50 @@ public class Interface {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String s = commandField.getText();
+			String s = inputField.getText();
 			if(s.isEmpty() || s.indexOf(';') < 0)
 				return;
+			journal.add(s);
 			ArrayList<String> commande = new ArrayList<String>();
 			int index = 0, argIndex = 0;
 			do {
+				commande.clear();
 				argIndex = index;
 				index = s.indexOf(';', index) + 1;
-				while(s.indexOf(' ', argIndex) < index && s.indexOf(' ', argIndex) >= 0){
-					commande.add(s.substring(argIndex, s.indexOf(' ', argIndex)));
+				while(s.indexOf(' ', argIndex) < index && s.indexOf(' ', argIndex) > argIndex) {
+					commande.add(s.substring(argIndex, s.indexOf(' ', argIndex)).trim());
 					argIndex = s.indexOf(' ', argIndex) + 1;
 				}
-				commande.add(s.substring(argIndex, index - 1));
+				commande.add(s.substring(argIndex, index - 1).trim());
 				for(CommandListener l1 : listeners)
 					l1.commandEntered(commande);
 			} while (index < s.lastIndexOf(';'));
-			commandField.setText("");
+			inputField.setText("");
+			indiceJournal = 0;
 		}
 
-		@Override public void keyPressed(KeyEvent e) {  }
+		@Override 
+		public void keyPressed(KeyEvent event){
+			if(event.getKeyCode() == 38){
+				try{
+					this.inputField.setText(this.journal.get(this.journal.size() - ++this.indiceJournal));
+				} catch (IndexOutOfBoundsException e) {
+					this.inputField.setText("");
+					this.indiceJournal = 0;
+				}
+			}
+			if(event.getKeyCode() == 40){
+				try{
+					this.inputField.setText(this.journal.get(this.journal.size() - --this.indiceJournal));
+				} catch (IndexOutOfBoundsException e) {
+					this.inputField.setText("");
+					if(this.indiceJournal < 0){
+						this.indiceJournal = this.journal.size() + 1;
+						this.inputField.setText(this.journal.get(this.journal.size() - --this.indiceJournal));
+					}
+				}
+			}
+		}
 		@Override public void keyReleased(KeyEvent e) { }
 	}
 

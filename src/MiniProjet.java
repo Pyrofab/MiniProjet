@@ -21,7 +21,7 @@ public class MiniProjet implements CommandListener{
 	  doc.put("afficherFlotte", "Affiche l'état de votre flotte");
 	  doc.put("afficherPersonnel", "Affiche l'état de votre personnel");
 	  doc.put("ajouterVaisseau", "Ajoute un vaisseau a votre flotte.\nusage: ajouterVaisseau nom type");
-	  doc.put("ajouterPersonnel", "Ajoute un membre generique a votre personnel.\nusage: ajouterPersonnel nom sexe grade");
+	  doc.put("ajouterPersonnel", "Ajoute un membre generique a votre personnel.\nusage: ajouterPersonnel [operateur|libere] nom sexe grade");
   }
 	
   public MiniProjet(){}
@@ -46,8 +46,19 @@ public class MiniProjet implements CommandListener{
 	  case "print": for(String args : s.subList(1, s.size())) log(args); break;
       case "afficherFlotte": log(flotte.toString()); break;
 	  case "afficherPersonnel": for(Membre m : personnel) log(m.toString()); break;
-	  case "ajouterVaisseau": if(s.size() == 3) flotte.ajouterVaisseau(new Vaisseau(s.get(1), s.get(2))); else log(doc.get("ajouterMembre"); break;
-      case "ajouterPersonnel": if(s.size() == 4) new Membre(s.get(1), s.get(2).charAt(0), s.get(3)); else log(doc.get("ajouterPersonnel")); break;
+	  case "ajouterVaisseau": if(s.size() == 3) flotte.ajouterVaisseau(new Vaisseau(s.get(1), s.get(2))); else log(doc.get("ajouterMembre")); break;
+      case "ajouterPersonnel": 
+		if(s.size() == 4) {
+			new Membre(s.get(1), s.get(2).charAt(0), s.get(3)); log("Membre ajoute");
+		} else if(s.size() == 5) {
+			switch(s.get(1)) {
+				case "libere": new Libere(s.get(2), s.get(3).charAt(0), s.get(4)); log("Membre libere ajoute !"); break;
+				case "operateur": new Operateur(s.get(2), s.get(3).charAt(0), s.get(4)); log("Operateur ajoute !"); break;
+				default: log(doc.get("ajouterPersonnel"));
+			}
+		} else
+			log(doc.get("ajouterPersonnel")); 
+		break;
 	  default: log(s.get(0) + " : commande non reconnue. Tapez 'help' pour avoir une liste des commandes disponibles");
     }
   }

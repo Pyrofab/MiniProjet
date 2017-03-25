@@ -5,5 +5,10 @@ public class Libere extends Membre {
 
   public Libere(String n, char s, String g) {
     super(n, s, g);
+	nbTransferts = 0;
+  }
+  
+  public String toString(){
+	  return super.toString() + " (membre libere)";
   }
 }
