@@ -29,11 +29,18 @@ public class Vaisseau {
     this.equipage.remove(i);
   }
 
-  public void supprimerMembre(String n) {
+  public boolean supprimerMembre(String n) {
     for(Membre m : equipage) {
-      if(m.getNom() == n)
+      if(m.getNom().equals(n)){
         equipage.remove(m);
+		return true;
+	  }
     }
+	return false;
+  }
+  
+  public String getNom(){
+	  return this.nom;
   }
 
   public String toString() {

@@ -22,6 +22,10 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.text.DefaultCaret;
 
+/**
+ * A simple GUI used to display text messages from the application.
+ * Sends CommandEntered events to the listeners. (objects that implements the CommandListener interface)
+ */
 public class Interface {
 
 	private static Frame frame;

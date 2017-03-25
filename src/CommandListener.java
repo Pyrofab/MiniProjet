@@ -5,7 +5,6 @@ import java.util.ArrayList;
 /**
  * The listener interface for receiving command events (from the interface). 
  * The class that is interested in processing a command event either implements this interface (and all the methods it contains)
- * or extends the abstract CommandListener class (overriding only the methods of interest).
  */	
 public interface CommandListener {
 	/**

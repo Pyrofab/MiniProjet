@@ -2,6 +2,9 @@ package es.esy.ladysnake.miniprojet;
 
 import java.util.ArrayList;
 
+/**
+ * A class describing Sion's fleet
+ */
 public class Flotte{
   private ArrayList<Vaisseau> flotte;
 
@@ -11,6 +14,13 @@ public class Flotte{
 
   public void ajouterVaisseau(Vaisseau v) {
     flotte.add(v);
+  }
+  
+  public Vaisseau getByName(String name) {
+	for (Vaisseau v : flotte)
+		if (v.getNom().equals(name))
+			return v;
+	return null;
   }
 
   public String toString(){
