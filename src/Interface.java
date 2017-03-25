@@ -75,7 +75,7 @@ public class Interface {
 		private static final long serialVersionUID = -2280547253170432552L;
 
 		JPanel panel;
-		JButton downloadButton;
+		JButton confirmButton;
 		JLabel label;
 		JScrollPane scrollPane;
 		JTextField commandField;
@@ -87,7 +87,7 @@ public class Interface {
 			setTitle(title);
 
 			panel = new JPanel();
-			downloadButton = new JButton(buttonTitle);
+			confirmButton = new JButton(buttonTitle);
 			label = new JLabel(labelText);
 			commandField = new JTextField("", 54);
 
@@ -103,13 +103,13 @@ public class Interface {
 
 			panel.add(label);
 			panel.add(commandField);
-			panel.add(downloadButton);
+			panel.add(confirmButton);
 			panel.add(scrollPane);
 			panel.add(currentStatus);
 			add(panel);
 
-			downloadButton.requestFocus();
-			downloadButton.addActionListener(this);
+			confirmButton.requestFocus();
+			confirmButton.addActionListener(this);
 			commandField.addKeyListener(this);
 
 			addWindowListener(new WindowAdapter() {

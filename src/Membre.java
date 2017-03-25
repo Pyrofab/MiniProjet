@@ -9,6 +9,7 @@ public class Membre {
     this.nom = n;
     this.sexe = s;
     this.grade = g;
+	MiniProjet.personnel.add(this);
   }
 
   public String getNom(){
