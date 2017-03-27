@@ -5,40 +5,51 @@ import java.util.ArrayList;
 public class Vaisseau {
   private String nom;
   private String type;
-  private ArrayList<Membre> equipage;
+  private Membre[] equipage;
 
   public Vaisseau(String n, String t) {
     this.nom = n;
     this.type = t;
-    equipage = new ArrayList<Membre>();
+    equipage = new Membre[5];
   }
 
-  public void ajouterMembre(Membre m) {
-    this.equipage.add(m);
+  public boolean ajouterMembre(Membre m) {
+    for(int i = 0; i < equipage.length; i++){
+      if(equipage[i] == null){
+        equipage[i] = m;
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public Membre[] getEquipage(){
+    return this.equipage;
   }
 
   public String afficherEquipage() {
     String res = "";
-    for(Membre m : equipage) {
-      res += m.toString();
+    for(int i = 0; i < equipage.length; i++) {
+      if(equipage[i] != null)
+        res += equipage[i].toString() + " ";
     }
     return res;
   }
 
   public void supprimerMembre(int i) {
-    this.equipage.remove(i);
+    this.equipage[i] = null;
   }
 
   public boolean supprimerMembre(String n) {
-    for(Membre m : equipage) {
-      if(m.getNom().equals(n)){
-        equipage.remove(m);
-		return true;
-	  }
+    for(int i = 0; i < equipage.length; i++) {
+      if(equipage[i] != null && equipage[i].getNom().equals(n)){
+        equipage[i] = null;
+		    return true;
+      }
     }
 	return false;
   }
-  
+
   public String getNom(){
 	  return this.nom;
   }
