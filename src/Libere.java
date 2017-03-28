@@ -1,4 +1,4 @@
-package es.esy.ladysnake.miniprojet;
+package es.esy.ladysnake.miniprojet.main;
 
 public class Libere extends Personne {
   private int nbTransferts;

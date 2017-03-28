@@ -1,4 +1,4 @@
-package es.esy.ladysnake.miniprojet;
+package es.esy.ladysnake.miniprojet.main;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ public class Flotte{
   public void ajouterVaisseau(Vaisseau v) {
     flotte.add(v);
   }
-  
+
   public Vaisseau getByName(String name) {
 	for (Vaisseau v : flotte)
 		if (v.getNom().equals(name))

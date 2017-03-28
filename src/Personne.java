@@ -1,6 +1,6 @@
-package es.esy.ladysnake.miniprojet;
+package es.esy.ladysnake.miniprojet.main;
 
-public class Personne {
+public abstract class Personne {
   private String nom;
   private char sexe;
   private String grade;

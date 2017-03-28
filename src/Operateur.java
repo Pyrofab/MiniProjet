@@ -1,4 +1,4 @@
-package es.esy.ladysnake.miniprojet;
+package es.esy.ladysnake.miniprojet.main;
 
 public class Operateur extends Personne {
   public Operateur(String n, char s, String g) {

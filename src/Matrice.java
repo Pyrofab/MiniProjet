@@ -1,12 +1,12 @@
-package es.esy.ladysnake.miniprojet;
+package es.esy.ladysnake.miniprojet.main;
 
 import java.util.Random;
 
 public class Matrice {
-  private Libere[][] matrice;
+  private Personne[][] matrice;
 
   public Matrice() {
-    this.matrice = new Libere[10][10];
+    this.matrice = new Personne[10][10];
   }
 
   public boolean isFull() {

@@ -74,6 +74,10 @@ public class Interface {
 			frame.currentStatus.setText(status);
 	}
 
+	public static void switchPanel(JPanel newPanel) {
+		frame.setContentPane(newPanel);
+	}
+
 	static final class Frame extends JFrame implements ActionListener, KeyListener {
 
 		private static final long serialVersionUID = -2280547253170432552L;
@@ -192,7 +196,7 @@ public class Interface {
 		@Override public void keyReleased(KeyEvent e) {
 			if(e.getKeyCode() == 17)
 				inputField.setText(listeners.get(0).commandTabbed(inputField.getText()));
-			}
+		}
 	}
 
 }

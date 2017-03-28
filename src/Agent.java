@@ -1,4 +1,4 @@
-package es.esy.ladysnake.miniprojet;
+package es.esy.ladysnake.miniprojet.main;
 
 import java.awt.Point;
 import java.util.Random;
