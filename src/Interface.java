@@ -174,8 +174,7 @@ public class Interface {
 				try{
 					this.inputField.setText(this.journal.get(this.journal.size() - ++this.indiceJournal));
 				} catch (IndexOutOfBoundsException e) {
-					this.inputField.setText("");
-					this.indiceJournal = 0;
+					--this.indiceJournal;
 				}
 			}
 			if(event.getKeyCode() == 40){
@@ -184,17 +183,16 @@ public class Interface {
 				} catch (IndexOutOfBoundsException e) {
 					this.inputField.setText("");
 					if(this.indiceJournal < 0){
-						this.indiceJournal = this.journal.size() + 1;
-						this.inputField.setText(this.journal.get(this.journal.size() - --this.indiceJournal));
+						this.indiceJournal = 0;
 					}
 				}
 			}
-			if(event.getKeyCode() == 17) {
+			// System.out.println(event.getKeyCode());
+		}
+		@Override public void keyReleased(KeyEvent e) {
+			if(e.getKeyCode() == 17)
 				inputField.setText(listeners.get(0).commandTabbed(inputField.getText()));
 			}
-			System.out.println(event.getKeyCode());
-		}
-		@Override public void keyReleased(KeyEvent e) { }
 	}
 
 }

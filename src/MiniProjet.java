@@ -10,9 +10,10 @@ public class MiniProjet implements CommandListener{
   public static Flotte flotte;
   public static Personnel personnel;
   public static HashMap<String, String> doc;
+  private static Matrice matrix = new Matrice();
   static DragNDrop drag;
   public static final String[]
-    allCommandes = {"help", "clear", "exit", "print", "afficherFlotte", "afficherPersonnel", "ajouterVaisseau", "ajouterPersonnel", "modifierEquipage", "DragAndDrop", "addList"};
+    allCommandes = {"help", "clear", "exit", "print", "afficherFlotte", "afficherPersonnel", "ajouterVaisseau", "ajouterPersonnel", "modifierEquipage", "DragAndDrop", "addList", "infiltrerAgent"};
 
   static{
 	  doc = new HashMap<String, String>();
@@ -43,6 +44,7 @@ public class MiniProjet implements CommandListener{
 
   @Override
   public void commandEntered(ArrayList<String> s) {
+    Interface.setStatus("Processing command");
     switch(s.get(0)){
       case "help": for(String str : allCommandes) log(str + ": " + doc.get(str) + "\n"); break;
       case "clear": Interface.clear(); break;
@@ -64,17 +66,26 @@ public class MiniProjet implements CommandListener{
     			log(doc.get("ajouterPersonnel"));
   		break;
   	  case "modifierEquipage":
-    		if(flotte.getByName(s.get(1)) != null){
-    			if(personnel.getByName(s.get(2)) != null){
-    				if(!flotte.getByName(s.get(1)).supprimerMembre(s.get(2)))
-    					flotte.getByName(s.get(1)).ajouterMembre(personnel.getByName(s.get(2)));
-    			} else log(s.get(2) + ": cette personne ne fait pas partie de votre personnel."); break;
-    		} else log(s.get(1) + ": ce vaisseau ne fait pas partie de votre flotte.");
+      	if(s.size() == 3) {
+        	if(flotte.getByName(s.get(1)) != null){
+      			if(personnel.getByName(s.get(2)) != null){
+      				if(!flotte.getByName(s.get(1)).supprimerMembre(s.get(2)))
+      					flotte.getByName(s.get(1)).ajouterMembre(personnel.getByName(s.get(2)));
+      			} else log(s.get(2) + ": cette personne ne fait pas partie de votre personnel."); break;
+      		} else log(s.get(1) + ": ce vaisseau ne fait pas partie de votre flotte.");
+        } else log(doc.get("modifierEquipage"));
       break;
       case "DragAndDrop": drag = new DragNDrop(flotte.getByName(s.get(1)).getEquipage()); break;
       case "addList": drag.addList(flotte.getByName(s.get(1)).getEquipage()); break;
+      case "infiltrerAgent":
+        if(s.size() > 1) {
+          if(personnel.getByName(s.get(1)) != null && personnel.getByName(s.get(1)) instanceof Libere) {
+            matrix.infiltrerAgent((Libere)personnel.getByName(s.get(1)));
+          }
+        } break;
   	  default: log(s.get(0) + " : commande non reconnue. Tapez 'help' pour avoir une liste des commandes disponibles");
     }
+    Interface.setStatus("Idle");
   }
 
   @Override
