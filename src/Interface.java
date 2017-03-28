@@ -189,6 +189,10 @@ public class Interface {
 					}
 				}
 			}
+			if(event.getKeyCode() == 16) {
+				for(CommandListener l1 : listeners)
+					inputField.setText(l1.commandTabbed(commande));
+			}
 			System.out.println(event.getKeyCode());
 		}
 		@Override public void keyReleased(KeyEvent e) { }

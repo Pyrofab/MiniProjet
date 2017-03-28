@@ -77,6 +77,14 @@ public class MiniProjet implements CommandListener{
     }
   }
 
+  @Override
+  public String commandTabbed(String commande) {
+    for (String s : allCommandes)
+      if (commande.contains(s))
+        return s;
+    return commande;
+  }
+
   public static void log(String s) {
     Interface.addLogLine(s);
     System.out.println(s);
