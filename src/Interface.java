@@ -189,9 +189,8 @@ public class Interface {
 					}
 				}
 			}
-			if(event.getKeyCode() == 16) {
-				for(CommandListener l1 : listeners)
-					inputField.setText(l1.commandTabbed(commande));
+			if(event.getKeyCode() == 17) {
+				inputField.setText(listeners.get(0).commandTabbed(inputField.getText()));
 			}
 			System.out.println(event.getKeyCode());
 		}

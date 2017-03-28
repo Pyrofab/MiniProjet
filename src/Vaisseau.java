@@ -23,6 +23,16 @@ public class Vaisseau {
     return false;
   }
 
+  public boolean isSecured() {
+    for (Membre m : equipage){
+      if(m != null && m.getClass().toString().equals("class es.esy.ladysnake.miniprojet.Operateur"))
+        return true;
+      if(m != null)
+        System.out.println(m.getClass().toString());
+      }
+    return false;
+  }
+
   public Membre[] getEquipage(){
     return this.equipage;
   }
@@ -55,6 +65,6 @@ public class Vaisseau {
   }
 
   public String toString() {
-    return this.nom + "(" + this.type + ")" + "\nEquipage:\n" + afficherEquipage() + "\n";
+    return this.nom + "(" + this.type + ")" + "\nEquipage:\n" + afficherEquipage() + "\nisSecured: " + isSecured() + "\n";
   }
 }

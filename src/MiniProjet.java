@@ -80,8 +80,8 @@ public class MiniProjet implements CommandListener{
   @Override
   public String commandTabbed(String commande) {
     for (String s : allCommandes)
-      if (commande.contains(s))
-        return s;
+      if (s.contains(commande))
+        return s + ";";
     return commande;
   }
 
