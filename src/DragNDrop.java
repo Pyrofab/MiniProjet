@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
+import javax.swing.DropMode;
 
 public class DragNDrop extends JFrame {
 

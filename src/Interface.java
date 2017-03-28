@@ -30,14 +30,14 @@ public class Interface {
 
 	private static Frame frame;
 	private static List<CommandListener> listeners = new ArrayList<CommandListener>();
-	
+
 	/**
 	 * Adds the object to the interface's listeners
 	 */
 	public static void addCommandListener(CommandListener toAdd){
 			listeners.add(toAdd);
 	}
-	
+
 	/**
 	 * Open the interface
 	 */
@@ -55,7 +55,7 @@ public class Interface {
 			frame.logArea.setText(currText.isEmpty() ? s : (currText + "\n" + s));
 		}
 	}
-	
+
 	/**
 	 * Clear the log area
 	 */
@@ -64,7 +64,7 @@ public class Interface {
 			frame.logArea.setText("");
 		}
 	}
-	
+
 	/**
 	 * Changes the status displayed at the bottom of the interface
 	 * @param status the status to display
@@ -91,7 +91,7 @@ public class Interface {
 		public Frame(String title, String buttonTitle, String labelText) {
 			setSize(800, 640);
 			setTitle(title);
-			
+
 			journal = new ArrayList<String>();
 			indiceJournal = 0;
 
@@ -168,7 +168,7 @@ public class Interface {
 			indiceJournal = 0;
 		}
 
-		@Override 
+		@Override
 		public void keyPressed(KeyEvent event){
 			if(event.getKeyCode() == 38){
 				try{
@@ -189,6 +189,7 @@ public class Interface {
 					}
 				}
 			}
+			System.out.println(event.getKeyCode());
 		}
 		@Override public void keyReleased(KeyEvent e) { }
 	}
