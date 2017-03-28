@@ -7,8 +7,8 @@ public class Libere extends Membre {
     super(n, s, g);
 	nbTransferts = 0;
   }
-  
-  public String toString(){
+
+  public String toString() {
 	  return super.toString() + " (membre libere)";
   }
 }
