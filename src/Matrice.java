@@ -9,6 +9,14 @@ public class Matrice {
     this.matrice = new Libere[10][10];
   }
 
+  public boolean isFull() {
+    return false;
+  }
+
+  public Personne get(int x, int y) {
+    return matrice[x][y];
+  }
+
   public void infiltrerAgent(Libere ag) {
     Random rand = new Random();
     int x, y;

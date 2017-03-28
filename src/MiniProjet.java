@@ -10,7 +10,7 @@ public class MiniProjet implements CommandListener {
   public static Flotte flotte;
   public static Personnel personnel;
   public static HashMap<String, String> doc;
-  private static Matrice matrix = new Matrice();
+  public static Matrice matrix = new Matrice();
   static DragNDrop drag;
   public static final String[]
     allCommandes = {"help", "clear", "exit", "print", "afficherFlotte", "afficherPersonnel", "ajouterVaisseau", "ajouterPersonnel", "modifierEquipage", "DragAndDrop", "addList", "infiltrerAgent"};
