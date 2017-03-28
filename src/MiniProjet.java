@@ -44,14 +44,9 @@ public class MiniProjet implements CommandListener {
 
   @Override
   public void commandEntered(ArrayList<String> s) {
-<<<<<<< HEAD
-    switch (s.get(0)) {
-      case "help": for (String str : allCommandes) log(str + ": " + doc.get(str) + "\n"); break;
-=======
     Interface.setStatus("Processing command");
-    switch(s.get(0)){
+    switch(s.get(0)) {
       case "help": for(String str : allCommandes) log(str + ": " + doc.get(str) + "\n"); break;
->>>>>>> e194bcfeb9ca7dc06386c7007c8cc2d431ae511d
       case "clear": Interface.clear(); break;
       case "exit": System.exit(0); break;
   	  case "print": for (String args : s.subList(1, s.size())) log(args); break;
@@ -71,14 +66,6 @@ public class MiniProjet implements CommandListener {
     			log(doc.get("ajouterPersonnel"));
   		break;
   	  case "modifierEquipage":
-<<<<<<< HEAD
-    		if (flotte.getByName(s.get(1)) != null){
-    			if (personnel.getByName(s.get(2)) != null){
-    				if (!flotte.getByName(s.get(1)).supprimerMembre(s.get(2)))
-    					flotte.getByName(s.get(1)).ajouterMembre(personnel.getByName(s.get(2)));
-    			} else log(s.get(2) + ": cette personne ne fait pas partie de votre personnel."); break;
-    		} else log(s.get(1) + ": ce vaisseau ne fait pas partie de votre flotte.");
-=======
       	if(s.size() == 3) {
         	if(flotte.getByName(s.get(1)) != null){
       			if(personnel.getByName(s.get(2)) != null){
@@ -87,7 +74,6 @@ public class MiniProjet implements CommandListener {
       			} else log(s.get(2) + ": cette personne ne fait pas partie de votre personnel."); break;
       		} else log(s.get(1) + ": ce vaisseau ne fait pas partie de votre flotte.");
         } else log(doc.get("modifierEquipage"));
->>>>>>> e194bcfeb9ca7dc06386c7007c8cc2d431ae511d
       break;
       case "DragAndDrop": drag = new DragNDrop(flotte.getByName(s.get(1)).getEquipage()); break;
       case "addList": drag.addList(flotte.getByName(s.get(1)).getEquipage()); break;
