@@ -6,18 +6,18 @@ import java.util.ArrayList;
  * A class describing Sion's people
  */
 public class Personnel{
-  private ArrayList<Membre> gens;
+  private ArrayList<Personne> gens;
 
   public Personnel() {
-    gens = new ArrayList<Membre>(1);
+    gens = new ArrayList<Personne>(1);
   }
 
-  public void ajouterMembre(Membre m) {
+  public void ajouterMembre(Personne m) {
     gens.add(m);
   }
-  
-  public Membre getByName(String name) {
-	for (Membre m : gens)
+
+  public Personne getByName(String name) {
+	for (Personne m : gens)
 		if (m.getNom().equals(name))
 			return m;
 	return null;
@@ -25,7 +25,7 @@ public class Personnel{
 
   public String toString(){
     String res = "Votre personnel:\n";
-    for(Membre m : gens){
+    for(Personne m : gens){
       res += m.toString() + "\n";
     }
     return res;

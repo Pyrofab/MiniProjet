@@ -5,15 +5,15 @@ import java.util.ArrayList;
 public class Vaisseau {
   private String nom;
   private String type;
-  private Membre[] equipage;
+  private Personne[] equipage;
 
   public Vaisseau(String n, String t) {
     this.nom = n;
     this.type = t;
-    equipage = new Membre[5];
+    equipage = new Personne[5];
   }
 
-  public boolean ajouterMembre(Membre m) {
+  public boolean ajouterMembre(Personne m) {
     for(int i = 0; i < equipage.length; i++){
       if(equipage[i] == null){
         equipage[i] = m;
@@ -24,8 +24,8 @@ public class Vaisseau {
   }
 
   public boolean isSecured() {
-    for (Membre m : equipage){
-      if(m != null && m.getClass().toString().equals("class es.esy.ladysnake.miniprojet.Operateur"))
+    for (Personne m : equipage){
+      if(m != null && m instanceof Operateur)
         return true;
       if(m != null)
         System.out.println(m.getClass().toString());
@@ -33,7 +33,7 @@ public class Vaisseau {
     return false;
   }
 
-  public Membre[] getEquipage(){
+  public Personne[] getEquipage(){
     return this.equipage;
   }
 

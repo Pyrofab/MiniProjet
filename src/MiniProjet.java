@@ -67,7 +67,7 @@ public class MiniProjet implements CommandListener {
         break;
       case "ajouterPersonnel":
       		if (s.size() == 4) {
-      			personnel.ajouterMembre(new Membre(s.get(1), s.get(2).charAt(0), s.get(3))); log("Membre ajoute");
+      			personnel.ajouterMembre(new Personne(s.get(1), s.get(2).charAt(0), s.get(3))); log("Membre ajoute");
       		} else if (s.size() == 5) {
       			switch (s.get(1)) {
       				case "libere": personnel.ajouterMembre(new Libere(s.get(2), s.get(3).charAt(0), s.get(4))); log("Membre libere ajoute !"); break;
