@@ -3,18 +3,18 @@ package es.esy.ladysnake.miniprojet.main;
 import java.util.Random;
 import java.awt.Point;
 
+/**
+ * La matrice
+ * Note : Il n'est pas possible de créer des instances de cette classe
+ */
 public class Matrice {
-  private Personne[][] matrice;
-
-  public Matrice() {
-    this.matrice = new Personne[10][10];
-  }
+  private static Personne[][] matrice = new Personne[10][10];
 
   /**
    * Indique si la matrice est pleine
    * @return vrai si la matrix est pleine
    */
-  public boolean isFull() {
+  public static boolean isFull() {
     for (int i = 0; i < 10; i++)
       for (int j = 0; j < 10; j++)
         if (matrice[i][j] == null)
@@ -28,7 +28,7 @@ public class Matrice {
    * @param y l'ordonnée de la personne
    * @return la personne aux coordonnees indiquees
    */
-  public Personne get(int x, int y) {
+  public static Personne get(int x, int y) {
     return matrice[x][y];
   }
 
@@ -37,7 +37,7 @@ public class Matrice {
    * @param ag la personne à infiltrer
    * @return true si l'insertion a été effectuée avec succès
    */
-  public boolean infiltrer(Personne ag) throws IllegalArgumentException {
+  public static boolean infiltrer(Personne ag) throws IllegalArgumentException {
     if(!(ag instanceof Agent || ag instanceof Libere))
       throw new IllegalArgumentException();
 
@@ -59,7 +59,7 @@ public class Matrice {
    * @param ag la personne à rechercher
    * @return les coordonnees de la personne sous forme de point, ou null si la personne n'est pas présente.
    */
-  public Point getPos (Personne ag) {
+  public static Point getPos (Personne ag) {
     for (int i = 0; i < 10; i++)
       for (int j = 0; j < 10; j++)
         if (matrice[i][j] == ag)
@@ -68,10 +68,10 @@ public class Matrice {
   }
 
   /**
-   * renvoie une représentation d'une matrice sous forme de String
-   * @return la représentation de cette matrice
+   * renvoie une représentation de la matrice sous forme de String
+   * @return la représentation de la matrice
    */
-  public String toString() {
+  public static String textMatrix() {
     String res = " ________________________________________________\n|   |    |    |    |    |    |    |    |    |    |\n|   | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  |\n|___|____|____|____|____|____|____|____|____|____|\n|   |    |    |    |    |    |    |    |    |    |\n";
     for (int i = 1; i <= 9; i++) {
       if (i < 9) {

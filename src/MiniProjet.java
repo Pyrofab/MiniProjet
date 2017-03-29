@@ -12,8 +12,7 @@ public class MiniProjet implements CommandListener {
   public static Flotte flotte;
   public static Personnel personnel;
   public static HashMap<String, String> doc;
-  public static Matrice matrix = new Matrice();
-  private static MatrixDisplay disp = new MatrixDisplay(matrix);
+  private static MatrixDisplay disp = new MatrixDisplay();
   private static DragNDrop drag;
   public static final String[]
     allCommandes = {"help", "clear", "exit", "print", "afficherFlotte", "afficherPersonnel", "ajouterVaisseau", "ajouterPersonnel", "modifierEquipage", "DragAndDrop", "addList", "infiltrerAgent"};
@@ -70,11 +69,11 @@ public class MiniProjet implements CommandListener {
       case "infiltrerAgent":
           if(s.size() > 1) {
             if(personnel.getByName(s.get(1)) != null && personnel.getByName(s.get(1)) instanceof Libere) {
-              matrix.infiltrer((Libere)personnel.getByName(s.get(1)));
+              Matrice.infiltrer((Libere)personnel.getByName(s.get(1)));
             }
           }
         break;
-      case "afficherMatrice": System.out.println(matrix.toString()); mortaugui(); break;
+      case "afficherMatrice": System.out.println(Matrice.afficherMatrice()); mortaugui(); break;
   	  default: log(s.get(0) + " : commande non reconnue. Tapez 'help' pour avoir une liste des commandes disponibles");
     }
     Interface.setStatus("Idle");

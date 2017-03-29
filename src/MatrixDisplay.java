@@ -10,13 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MatrixDisplay extends JPanel implements Runnable, ActionListener {
-  private Matrice matrix;
   private JButton exit;
   private boolean shouldRun;
   private int minY;
 
-  public MatrixDisplay(Matrice mat) {
-    this.matrix = mat;
+  public MatrixDisplay() {
     this.exit = new JButton("exit");
     this.add(exit);
     exit.addActionListener(this);
@@ -55,7 +53,7 @@ public class MatrixDisplay extends JPanel implements Runnable, ActionListener {
       for (int y = 1; y < 10; y++) {
         g.drawString(y + "", 10, exit.getHeight() + 10 + (y+1)*(this.getHeight() - exit.getHeight() - 10)/10 - 20);
         // g.drawString((10*(x-1) + y) +"", 20 + x * (this.getWidth())/10, exit.getHeight() + 10 + (y+1)*(this.getHeight() - exit.getHeight() - 10)/10 - 20);
-        g.drawString((matrix.get(x, y)) +"", 20 + x * (this.getWidth())/10, exit.getHeight() + 10 + (y+1)*(this.getHeight() - exit.getHeight() - 10)/10 - 20);
+        g.drawString((Matrice.get(x, y)) +"", 20 + x * (this.getWidth())/10, exit.getHeight() + 10 + (y+1)*(this.getHeight() - exit.getHeight() - 10)/10 - 20);
       }
     }
   }

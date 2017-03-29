@@ -57,10 +57,10 @@ public class Vaisseau {
 		    return true;
       }
     }
-	return false;
+	  return false;
   }
 
-  public String getNom(){
+  public String getNom() {
 	  return this.nom;
   }
 
