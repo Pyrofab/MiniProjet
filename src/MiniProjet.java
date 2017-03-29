@@ -37,12 +37,13 @@ public class MiniProjet implements CommandListener {
   	 Interface.addCommandListener(new MiniProjet());
      flotte = new Flotte();
   	 personnel = new Personnel();
-     Interface.openInterface("Matrix Simulator mk3", "Confirmer", "Entrer une commande");
+     Interface.openInterface("Matrix Simulator mk3", "Confirmer", "Commande:");
      Libere m = new Libere("Neo", 'm', "Lieutenant");
 	   personnel.ajouterMembre(m);
      Vaisseau v = new Vaisseau("Nebuchadnezzar", "Transport");
      v.ajouterMembre(m);
      flotte.ajouterVaisseau(v);
+     mortaugui();
   }
 
   @Override

@@ -106,7 +106,7 @@ public class Interface {
 			panel = new JPanel();
 			confirmButton = new JButton(buttonTitle);
 			label = new JLabel(labelText);
-			inputField = new JTextField("", 54);
+			inputField = new JTextField("", 42);
 
 			logArea = new JTextArea(34, 68);
 			logArea.setBackground(Color.WHITE);
