@@ -1,6 +1,6 @@
 package es.esy.ladysnake.miniprojet.main;
 
-public class Libere extends Personne {
+public class Libere extends Infiltrable {
   private int nbTransferts;
 
   public Libere(String n, char s, String g) {

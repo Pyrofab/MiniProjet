@@ -70,7 +70,7 @@ public class MiniProjet implements CommandListener {
       case "infiltrerAgent":
           if(s.size() > 1) {
             if(personnel.getByName(s.get(1)) != null && personnel.getByName(s.get(1)) instanceof Libere) {
-              matrix.infiltrerAgent((Libere)personnel.getByName(s.get(1)));
+              matrix.infiltrer((Libere)personnel.getByName(s.get(1)));
             }
           }
         break;
