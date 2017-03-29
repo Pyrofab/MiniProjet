@@ -37,8 +37,8 @@ public class Matrice {
    * @param ag la personne à infiltrer
    * @return true si l'insertion a été effectuée avec succès
    */
-  public boolean infiltrer(Personne ag) throws IllegalArgumentException {
-    if(!(ag instanceof Agent || ag instanceof Libere))
+  public boolean infiltrer(Personne p) throws IllegalArgumentException {
+    if(!(p instanceof Agent || p instanceof Libere))
       throw new IllegalArgumentException();
 
     Random rand = new Random();
@@ -48,11 +48,18 @@ public class Matrice {
         x = rand.nextInt(9);
         y = rand.nextInt(9);
       } while (matrice[x][y] != null);
-      matrice[x][y] = ag;
+      matrice[x][y] = p;
       return true;
     }
     return false;
   }
+
+  public void exfiltrer(Personne p) {
+    matrice[getPos(p).x][getPos(p).y] = null;
+  }
+
+
+
 
   /**
    * Permet de connaître la position d'une personne dans la matrice

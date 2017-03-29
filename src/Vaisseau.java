@@ -16,6 +16,7 @@ public class Vaisseau {
   public boolean ajouterMembre(Personne m) {
     for(int i = 0; i < equipage.length; i++){
       if(equipage[i] == null){
+        m.setVaisseau(this);
         equipage[i] = m;
         return true;
       }
