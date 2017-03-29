@@ -74,6 +74,10 @@ public class Interface {
 			frame.currentStatus.setText(status);
 	}
 
+	public static void switchPanel() {
+		frame.setContentPane(frame.panel);
+	}
+
 	public static void switchPanel(JPanel newPanel) {
 		frame.setContentPane(newPanel);
 	}

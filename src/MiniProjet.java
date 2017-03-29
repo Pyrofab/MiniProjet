@@ -73,7 +73,7 @@ public class MiniProjet implements CommandListener {
             }
           }
         break;
-      case "mortaugui": Interface.switchPanel(disp); disp.repaint(); break;
+      case "afficherMatrice": System.out.println(matrix.toString()); mortaugui(); break;
   	  default: log(s.get(0) + " : commande non reconnue. Tapez 'help' pour avoir une liste des commandes disponibles");
     }
     Interface.setStatus("Idle");
@@ -107,6 +107,11 @@ public class MiniProjet implements CommandListener {
           flotte.getByName(args.get(0)).ajouterMembre(personnel.getByName(args.get(1)));
       } else log(args.get(1) + ": cette personne ne fait pas partie de votre personnel.");
     } else log(args.get(0) + ": ce vaisseau ne fait pas partie de votre flotte.");
+  }
+
+  public static void mortaugui() {
+    Interface.switchPanel(disp);
+    (new Thread(disp)).start();
   }
 
   public static void log (List<String> args) {
