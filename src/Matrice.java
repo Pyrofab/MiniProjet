@@ -37,8 +37,9 @@ public class Matrice {
    * @param ag la personne à infiltrer
    * @return true si l'insertion a été effectuée avec succès
    */
-  public static boolean infiltrer(Personne ag) throws IllegalArgumentException {
-    if(!(ag instanceof Agent || ag instanceof Libere))
+
+  public static boolean infiltrer(Personne p) throws IllegalArgumentException {
+    if(!(p instanceof Agent || p instanceof Libere))
       throw new IllegalArgumentException();
 
     Random rand = new Random();
@@ -48,11 +49,18 @@ public class Matrice {
         x = rand.nextInt(9);
         y = rand.nextInt(9);
       } while (matrice[x][y] != null);
-      matrice[x][y] = ag;
+      matrice[x][y] = p;
       return true;
     }
     return false;
   }
+
+  public static void exfiltrer(Personne p) {
+    matrice[getPos(p).x][getPos(p).y] = null;
+  }
+
+
+
 
   /**
    * Permet de connaître la position d'une personne dans la matrice
@@ -67,21 +75,7 @@ public class Matrice {
     return null;
   }
 
-  /**
-   * renvoie une représentation de la matrice sous forme de String
-   * @return la représentation de la matrice
-   */
-  public static String textMatrix() {
-    String res = " ________________________________________________\n|   |    |    |    |    |    |    |    |    |    |\n|   | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  |\n|___|____|____|____|____|____|____|____|____|____|\n|   |    |    |    |    |    |    |    |    |    |\n";
-    for (int i = 1; i <= 9; i++) {
-      if (i < 9) {
-        res += "| "+i+" | xx | xx | xx | xx | xx | xx | xx | xx | xx |\n|___|____|____|____|____|____|____|____|____|____|\n|   |    |    |    |    |    |    |    |    |    |\n";
-      } else {
-        res += "| "+i+" | xx | xx | xx | xx | xx | xx | xx | xx | xx |\n|___|____|____|____|____|____|____|____|____|____|\n";
-      }
-    }
-    return res;
-  }
+  
 }
 
 

@@ -16,6 +16,7 @@ public class Vaisseau {
   public boolean ajouterMembre(Personne m) {
     for(int i = 0; i < equipage.length; i++){
       if(equipage[i] == null){
+        m.setVaisseau(this);
         equipage[i] = m;
         return true;
       }
@@ -40,13 +41,16 @@ public class Vaisseau {
   public String afficherEquipage() {
     String res = "";
     for(int i = 0; i < equipage.length; i++) {
-      if(equipage[i] != null)
+      if(equipage[i] != null){
+        equipage[i].setVaisseau(null);
         res += equipage[i].toString() + " ";
+      }
     }
     return res;
   }
 
   public void supprimerMembre(int i) {
+    this.equipage[i].setVaisseau(null);
     this.equipage[i] = null;
   }
 

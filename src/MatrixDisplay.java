@@ -2,6 +2,7 @@ package es.esy.ladysnake.miniprojet.display;
 
 import es.esy.ladysnake.miniprojet.main.Matrice;
 import es.esy.ladysnake.gui.Interface;
+import es.esy.ladysnake.miniprojet.main.MiniProjet;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.Graphics;
@@ -18,6 +19,21 @@ public class MatrixDisplay extends JPanel implements Runnable, ActionListener {
     this.exit = new JButton("exit");
     this.add(exit);
     exit.addActionListener(this);
+  }
+
+  /**
+   * affiche une représentation de la matrice sous forme de texte
+   */
+  public static void textMatrix() {
+    String res = " ________________________________________________\n|   |    |    |    |    |    |    |    |    |    |\n|   | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  |\n|___|____|____|____|____|____|____|____|____|____|\n|   |    |    |    |    |    |    |    |    |    |\n";
+    for (int i = 1; i <= 9; i++) {
+      if (i < 9) {
+        res += "| "+i+" | xx | xx | xx | xx | xx | xx | xx | xx | xx |\n|___|____|____|____|____|____|____|____|____|____|\n|   |    |    |    |    |    |    |    |    |    |\n";
+      } else {
+        res += "| "+i+" | xx | xx | xx | xx | xx | xx | xx | xx | xx |\n|___|____|____|____|____|____|____|____|____|____|\n";
+      }
+    }
+    MiniProjet.log(res);
   }
 
   @Override

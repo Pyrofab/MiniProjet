@@ -73,7 +73,7 @@ public class MiniProjet implements CommandListener {
             }
           }
         break;
-      case "afficherMatrice": System.out.println(Matrice.afficherMatrice()); mortaugui(); break;
+      case "afficherMatrice": MatrixDisplay.textMatrix(); mortaugui(); break;
   	  default: log(s.get(0) + " : commande non reconnue. Tapez 'help' pour avoir une liste des commandes disponibles");
     }
     Interface.setStatus("Idle");
