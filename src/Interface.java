@@ -33,6 +33,7 @@ public class Interface {
 
 	/**
 	 * Adds the object to the interface's listeners
+	 * @param toAdd an implementation on the CommandListener interface
 	 */
 	public static void addCommandListener(CommandListener toAdd){
 			listeners.add(toAdd);
@@ -40,6 +41,9 @@ public class Interface {
 
 	/**
 	 * Open the interface
+	 * @param title the title this interface will display
+	 * @param buttonTitle the confirmation button's displayed text
+	 * @param labelText the hint displayed next to this interface's textField
 	 */
 	public static void openInterface(String title, String buttonTitle, String labelText) {
 		frame = new Frame(title, buttonTitle, labelText);
@@ -74,11 +78,18 @@ public class Interface {
 			frame.currentStatus.setText(status);
 	}
 
-	public static void switchPanel() {
+	/**
+	 * Swaps the Interface's panel with the default one
+	 */
+	public static void swapPanel() {
 		frame.setContentPane(frame.panel);
 	}
 
-	public static void switchPanel(JPanel newPanel) {
+	/**
+	 * Swaps the Interface's panel with the one provided in the parameters
+	 * @param newPanel the JPanel for this frame
+	 */
+	public static void swapPanel(JPanel newPanel) {
 		frame.setContentPane(newPanel);
 	}
 

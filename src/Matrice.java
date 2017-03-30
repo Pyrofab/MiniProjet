@@ -34,7 +34,7 @@ public class Matrice {
 
   /**
    * Permet d'insérer un agent ou un membre libéré dans la matrice
-   * @param ag la personne à infiltrer
+   * @param p la personne à infiltrer
    * @return true si l'insertion a été effectuée avec succès
    */
 
@@ -75,7 +75,7 @@ public class Matrice {
     return null;
   }
 
-  
+
 }
 
 

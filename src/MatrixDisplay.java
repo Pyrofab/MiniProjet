@@ -1,8 +1,8 @@
 package es.esy.ladysnake.miniprojet.display;
 
+import es.esy.ladysnake.miniprojet.main.MiniProjet;
 import es.esy.ladysnake.miniprojet.main.Matrice;
 import es.esy.ladysnake.gui.Interface;
-import es.esy.ladysnake.miniprojet.main.MiniProjet;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.Graphics;
@@ -48,7 +48,7 @@ public class MatrixDisplay extends JPanel implements Runnable, ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     shouldRun = false;
-    Interface.switchPanel();
+    Interface.swapPanel();
   }
 
   @Override

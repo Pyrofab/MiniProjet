@@ -110,7 +110,7 @@ public class MiniProjet implements CommandListener {
   }
 
   public static void mortaugui() {
-    Interface.switchPanel(disp);
+    Interface.swapPanel(disp);
     (new Thread(disp)).start();
   }
 
