@@ -42,6 +42,9 @@ public class MatrixDisplay extends JPanel implements Runnable, ActionListener {
     while (shouldRun) {
       // System.out.print("l");
       this.repaint();
+      try {
+        Thread.sleep(16);
+      } catch (InterruptedException e) {   }
     }
   }
 
@@ -69,7 +72,7 @@ public class MatrixDisplay extends JPanel implements Runnable, ActionListener {
       for (int y = 1; y < 10; y++) {
         g.drawString(y + "", 10, exit.getHeight() + 10 + (y+1)*(this.getHeight() - exit.getHeight() - 10)/10 - 20);
         // g.drawString((10*(x-1) + y) +"", 20 + x * (this.getWidth())/10, exit.getHeight() + 10 + (y+1)*(this.getHeight() - exit.getHeight() - 10)/10 - 20);
-        g.drawString((Matrice.get(x, y)) +"", 20 + x * (this.getWidth())/10, exit.getHeight() + 10 + (y+1)*(this.getHeight() - exit.getHeight() - 10)/10 - 20);
+        g.drawString((Matrice.get(x, y) == null) ? "" : Matrice.get(x, y).getNom(), 20 + x * (this.getWidth())/10, exit.getHeight() + 10 + (y+1)*(this.getHeight() - exit.getHeight() - 10)/10 - 20);
       }
     }
   }

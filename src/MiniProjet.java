@@ -66,10 +66,10 @@ public class MiniProjet implements CommandListener {
   	  case "modifierEquipage": if(s.size() == 3) modifierEquipage(s.subList(1, s.size())); else log(doc.get("modifierEquipage")); break;
       case "DragAndDrop": drag = new DragNDrop(flotte.getByName(s.get(1)).getEquipage()); break;
       case "addList": drag.addList(flotte.getByName(s.get(1)).getEquipage()); break;
-      case "infiltrerAgent":
+      case "infiltrer":
           if(s.size() > 1) {
             if(personnel.getByName(s.get(1)) != null && personnel.getByName(s.get(1)) instanceof Libere) {
-              Matrice.infiltrer((Libere)personnel.getByName(s.get(1)));
+              log((((Libere)personnel.getByName(s.get(1))).transfert() != 0) ? "true" : "false");
             }
           }
         break;
