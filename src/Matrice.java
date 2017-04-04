@@ -8,7 +8,7 @@ import java.awt.Point;
  * Note : Il n'est pas possible de créer des instances de cette classe
  */
 public class Matrice {
-  private static Personne[][] matrice = new Personne[10][10];
+  private static Object[][] matrice = new Object[10][10];
 
   /**
    * Indique si la matrice est pleine
@@ -28,7 +28,7 @@ public class Matrice {
    * @param y l'ordonnée de la personne
    * @return la personne aux coordonnees indiquees
    */
-  public static Personne get(int x, int y) {
+  public static Object get(int x, int y) {
     return matrice[x][y];
   }
 
@@ -38,7 +38,7 @@ public class Matrice {
    * @return true si l'insertion a été effectuée avec succès
    */
 
-  public static boolean infiltrer(Personne p) throws IllegalArgumentException {
+  public static boolean infiltrer(Object p) throws IllegalArgumentException {
     if(!(p instanceof Agent || p instanceof Libere))
       throw new IllegalArgumentException();
 
@@ -55,8 +55,11 @@ public class Matrice {
     return false;
   }
 
-  public static void exfiltrer(Personne p) {
+  public static boolean exfiltrer(Object p) {
+    if(matrice[getPos(p).x][getPos(p).y] == null)
+      return false;
     matrice[getPos(p).x][getPos(p).y] = null;
+    return true;
   }
 
 
@@ -67,7 +70,7 @@ public class Matrice {
    * @param ag la personne à rechercher
    * @return les coordonnees de la personne sous forme de point, ou null si la personne n'est pas présente.
    */
-  public static Point getPos (Personne ag) {
+  public static Point getPos (Object ag) {
     for (int i = 0; i < 10; i++)
       for (int j = 0; j < 10; j++)
         if (matrice[i][j] == ag)

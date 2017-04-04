@@ -3,9 +3,12 @@ package es.esy.ladysnake.miniprojet.main;
 import java.util.ArrayList;
 
 public class Vaisseau {
-  private String nom;
-  private String type;
+  private String nom, type;
   private Personne[] equipage;
+
+  public Vaisseau() {
+    this("Vaisseau" + Flotte.size(), "Transport");
+  }
 
   public Vaisseau(String n, String t) {
     this.nom = n;
@@ -43,7 +46,7 @@ public class Vaisseau {
     for(int i = 0; i < equipage.length; i++) {
       if(equipage[i] != null){
         equipage[i].setVaisseau(null);
-        res += equipage[i].toString() + " ";
+        res += equipage[i].toString() + "; ";
       }
     }
     return res;

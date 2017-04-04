@@ -17,12 +17,13 @@ public class Libere extends Personne {
       // pas dans la matrice
       if (this.vaisseau.isSecured()) {
         // vaisseau sécurisé
-        Matrice.infiltrer(this);
+        if(!Matrice.infiltrer(this))
+          return 0;
         this.nbTransferts++;
         return 1;
       } else {
         // vaisseau non sécurisé
-        return 0;
+        return 69;
       }
     } else {
       // dans la matrice

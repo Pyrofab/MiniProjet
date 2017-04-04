@@ -6,24 +6,24 @@ import java.util.ArrayList;
  * A class describing Sion's fleet
  */
 public class Flotte{
-  private ArrayList<Vaisseau> flotte;
+  private static ArrayList<Vaisseau> flotte = new ArrayList<Vaisseau>(1);
 
-  public Flotte() {
-    flotte = new ArrayList<Vaisseau>(1);
-  }
-
-  public void ajouterVaisseau(Vaisseau v) {
+  public static void ajouterVaisseau(Vaisseau v) {
     flotte.add(v);
   }
 
-  public Vaisseau getByName(String name) {
+  public static Vaisseau getByName(String name) {
 	for (Vaisseau v : flotte)
 		if (v.getNom().equals(name))
 			return v;
 	return null;
   }
 
-  public String toString(){
+  public static int size() {
+    return flotte.size();
+  }
+
+  public static String afficher(){
     String res = "Votre flotte:\n";
     for(Vaisseau v : flotte){
       res += v.toString() + "\n";
