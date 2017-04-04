@@ -2,14 +2,12 @@ package es.esy.ladysnake.miniprojet.main;
 
 import es.esy.ladysnake.gui.CommandListener;
 import es.esy.ladysnake.gui.Interface;
-import es.esy.ladysnake.gui.DragNDrop;
 import es.esy.ladysnake.miniprojet.display.MatrixDisplay;
 import es.esy.ladysnake.miniprojet.display.CommandExecuter;
 import java.util.List;
 
 public class MiniProjet {
   public static final MatrixDisplay matrixDisp;
-  private static DragNDrop drag;
 
   static {
     matrixDisp = new MatrixDisplay();
@@ -17,8 +15,6 @@ public class MiniProjet {
     disp.setName("AffichageMatrice");
     disp.start();
   }
-
-  public MiniProjet() {}
 
   public static void main(String[] args) {
   	 Interface.addCommandListener(new CommandExecuter());

@@ -8,9 +8,13 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe executant les commandes entrees dans l'Interface.
+ * Toutes les commandes ont une documentation correspondante.
+ */
 public class CommandExecuter implements CommandListener {
   public static final String[] allCommandes = {"help", "clear", "exit", "print", "autoPlay", "afficherFlotte", "afficherPersonnel", "afficherMachines", "afficherMatrice", "ajouterVaisseau", "ajouterPersonnel", "modifierEquipage", "transfert"};
-  public static HashMap<String, String> doc;
+  public static final HashMap<String, String> doc;
 
   static {
     doc = new HashMap<String, String>();
@@ -100,7 +104,7 @@ public class CommandExecuter implements CommandListener {
 
   public static void commandMortaugui() {
     Interface.swapPanel(MiniProjet.matrixDisp);
-    MiniProjet.matrixDisp.relancer();
+    MiniProjet.matrixDisp.shouldRun = true;
   }
 
   public static void commandTransfert(String arg) {

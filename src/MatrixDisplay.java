@@ -17,9 +17,12 @@ import java.awt.event.ActionListener;
  */
 public class MatrixDisplay extends JPanel implements Runnable, ActionListener {
   private JButton exit;
-  private boolean shouldRun;
+  public volatile boolean shouldRun;
   private int minY;
 
+  /**
+   * Constructeur de la classe MatrixDisplay
+   */
   public MatrixDisplay() {
     this.exit = new JButton("exit");
     this.add(exit);
@@ -42,25 +45,21 @@ public class MatrixDisplay extends JPanel implements Runnable, ActionListener {
     System.out.println(res);
   }
 
-  public void relancer() {
-    shouldRun = true;
-  }
-
-  public void arreter() {
-    shouldRun = false;
-  }
-
+  /**
+   * Rafraichissement de l'affichage de la matrice 60 fois par seconde
+   * Les autres classes peuvent utiliser shouldRun pour activer ou desactiver le rafraichissement
+   */
   @Override
   public void run() {
     while (true) {
       while (shouldRun) {
-        System.out.print("l");
-        // try {
+        // System.out.print("l");
+        try {
           this.repaint();
-        // } catch (Exception e) {
-        //   e.printStackTrace();
-        //   actionPerformed(null);
-        // }
+        } catch (Exception e) {
+          e.printStackTrace();
+          actionPerformed(null);
+        }
         try {
           Thread.sleep(16);
         } catch (InterruptedException e) {   }
@@ -68,12 +67,19 @@ public class MatrixDisplay extends JPanel implements Runnable, ActionListener {
     }
   }
 
+  /**
+   * Quitte l'affichage de la matrice et revient a l'interface par default
+   * @param e l'evenement declencheur
+   */
   @Override
   public void actionPerformed(ActionEvent e) {
     shouldRun = false;
     Interface.swapPanel();
   }
 
+  /**
+   * Affiche la matrice et son contenu
+   */
   @Override
   public void paintComponent(Graphics g) {
     g.clearRect(0,0,this.getWidth(), this.getHeight());

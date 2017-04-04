@@ -4,8 +4,8 @@ import java.util.Random;
 import java.awt.Point;
 
 /**
- * La matrice
- * Note : Il n'est pas possible de créer des instances de cette classe
+ * La matrice.
+ * Note : Il n'est pas possible de créer des instances de cette classe.
  */
 public class Matrice {
   private static Object[][] matrice = new Object[10][10];
@@ -23,17 +23,17 @@ public class Matrice {
   }
 
   /**
-   * Permet d'obtenir le contenu de la matrice aux coordonnees indiquees
+   * Permet d'obtenir le contenu de la matrice aux coordonnées indiquées
    * @param x l'abcisse de la personne
    * @param y l'ordonnée de la personne
-   * @return la personne aux coordonnees indiquees
+   * @return la personne aux coordonnées indiquées
    */
   public static Object get(int x, int y) {
     return matrice[x][y];
   }
 
   /**
-   * Permet d'insérer un agent ou un membre libéré dans la matrice
+   * Permet d'insérer un agent ou un membre liberé dans la matrice
    * @param p la personne à infiltrer
    * @return true si l'insertion a été effectuée avec succès
    */
@@ -55,6 +55,11 @@ public class Matrice {
     return false;
   }
 
+  /**
+   * Permet de sortir un agent ou un membre libéré de la matrice
+   * @param p la personne à exfiltrer
+   * @return true si l'arrachage a été effectué avec succès
+   */
   public static boolean exfiltrer(Object p) {
     if(matrice[getPos(p).x][getPos(p).y] == null)
       return false;
@@ -68,7 +73,7 @@ public class Matrice {
   /**
    * Permet de connaître la position d'une personne dans la matrice
    * @param ag la personne à rechercher
-   * @return les coordonnees de la personne sous forme de point, ou null si la personne n'est pas présente.
+   * @return les coordonnées de la personne sous forme de point, ou null si la personne n'est pas présente.
    */
   public static Point getPos (Object ag) {
     for (int i = 0; i < 10; i++)

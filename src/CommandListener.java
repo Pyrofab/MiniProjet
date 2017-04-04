@@ -12,5 +12,10 @@ public interface CommandListener {
 	 * @param commande The command that's been input along with its arguments.
 	 */
 	abstract void commandEntered(ArrayList<String> commande);
+	/**
+	 * Invoked when the user tries to autocomplete the command he's typing.
+	 * @param commande The command that's been written so far.
+	 * @return The command the implementation thinks has been asked for.
+	 */
 	abstract String commandTabbed(String commande);
 }
