@@ -33,6 +33,10 @@ public class Agent {
     return null;
   }
 
+  public static ArrayList<Agent> getAll() {
+    return machineForces;
+  }
+
   /**
    * @return une représentation de l'intégralité des forces des machines sous forme de String
    */
@@ -52,8 +56,13 @@ public class Agent {
   }
 
   /**
-   * @return une représentation de cet agent sous forme de String
+   * Divise par 2 le niveau de l'agent.
    */
+  public void sap() {
+    this.lvl /= 2;
+  }
+
+  @Override
   public String toString() {
     return "Agent #" + this.id + " niveau " + this.lvl;
   }

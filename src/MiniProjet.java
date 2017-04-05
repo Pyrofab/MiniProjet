@@ -35,6 +35,7 @@ public class MiniProjet {
     Vaisseau v2 = new Vaisseau("Goliath", "PL-47");
     v2.ajouterMembre(new Libere("Morpheus", 'm', "Commandant"));
     Flotte.ajouterVaisseau(v2);
+    new Libere("Redpill", 'f', "Caporal");
     // commandMortaugui();
   }
 

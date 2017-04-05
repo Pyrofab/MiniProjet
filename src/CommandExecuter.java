@@ -30,37 +30,43 @@ public class CommandExecuter implements CommandListener {
 	  doc.put("ajouterVaisseau", "Ajoute un vaisseau a votre flotte.\nusage: ajouterVaisseau <nom> <type>");
 	  doc.put("ajouterPersonnel", "Ajoute un membre a votre personnel.\nusage: ajouterPersonnel (operateur|libere) <nom> <sexe> <grade>");
 	  doc.put("modifierEquipage", "Ajoute un membre de votre personnel a l'equipage du vaisseau, ou le supprime si il y est deja.\nusage: modifierEquipage <nomVaisseau> <nomMembre>");
-    doc.put("transfert", "Infiltre un membre de votre personnel ou un agent dans la matrice, ou l'exfiltre si il y est deja.\nusage: transfert <nom_du_libere|uid_de_agent>");
+    doc.put("transfert", "Infiltre un membre de votre personnel ou un agent dans la matrice, ou l'exfiltre si il y est deja.\nusage: transfert <nom_du_libere|uid_de_agent|all>");
   }
 
   @Override
   public void commandEntered(ArrayList<String> s) {
-    Interface.setStatus("Processing command");
-    switch(s.get(0)) {
-      case "help": if(s.size() == 1) commandHelp(); else commandHelp(s.get(1)); break;
-      case "clear": Interface.clear(); break;
-      case "exit": System.exit(0); break;
-  	  case "print": MiniProjet.log(s.subList(1, s.size())); break;
-      case "autoPlay": MiniProjet.autoPlay();
-      case "afficherFlotte": MiniProjet.log(Flotte.afficher()); break;
-  	  case "afficherPersonnel": MiniProjet.log(Personne.afficher()); break;
-  	  case "ajouterVaisseau": if (s.size() == 3) commandAjouterVaisseau(s.subList(1, s.size())); else MiniProjet.log(doc.get("ajouterVaisseau")); break;
-      case "ajouterPersonnel": if (s.size() == 5) commandAjouterPersonnel(s.subList(1, s.size())); else	MiniProjet.log(doc.get("ajouterPersonnel"));	break;
-      case "ajouterAgent": new Agent(); break;
-      case "modifierEquipage": if(s.size() == 3) commandModifierEquipage(s.subList(1, s.size())); else MiniProjet.log(doc.get("modifierEquipage")); break;
-      case "transfert": if(s.size() == 2) commandTransfert(s.get(1)); else MiniProjet.log(doc.get("transfert")); break;
-      case "afficherMatrice": MatrixDisplay.textMatrix(); commandMortaugui(); break;
-      case "afficherMachines": MiniProjet.log(Agent.afficherForces()); break;
-  	  default: MiniProjet.log(s.get(0) + " : commande non reconnue. Tapez 'help' pour avoir une liste des commandes disponibles");
+    try {
+      Interface.setStatus("Processing command");
+      switch(s.get(0)) {
+        case "help": if(s.size() == 1) commandHelp(); else commandHelp(s.get(1)); break;
+        case "clear": Interface.clear(); break;
+        case "exit": System.exit(0); break;
+    	  case "print": MiniProjet.log(s.subList(1, s.size())); break;
+        case "autoPlay": MiniProjet.autoPlay();
+        case "afficherFlotte": MiniProjet.log(Flotte.afficher()); break;
+    	  case "afficherPersonnel": MiniProjet.log(Personne.afficher()); break;
+    	  case "ajouterVaisseau": if (s.size() == 3) commandAjouterVaisseau(s.subList(1, s.size())); else MiniProjet.log(doc.get("ajouterVaisseau")); break;
+        case "ajouterPersonnel": if (s.size() == 5) commandAjouterPersonnel(s.subList(1, s.size())); else	MiniProjet.log(doc.get("ajouterPersonnel"));	break;
+        case "ajouterAgent": new Agent(); break;
+        case "modifierEquipage": if(s.size() == 3) commandModifierEquipage(s.subList(1, s.size())); else MiniProjet.log(doc.get("modifierEquipage")); break;
+        case "transfert": if(s.size() == 2) commandTransfert(s.get(1)); else MiniProjet.log(doc.get("transfert")); break;
+        case "afficherMatrice": MatrixDisplay.textMatrix(); commandMortaugui(); break;
+        case "afficherMachines": MiniProjet.log(Agent.afficherForces()); break;
+    	  default: MiniProjet.log(s.get(0) + " : commande non reconnue. Tapez 'help' pour avoir une liste des commandes disponibles");
+      }
+      Interface.setStatus("Idle");
+    } catch (Exception e){
+      MiniProjet.log("Une erreur est survenue");
+      Interface.setStatus("Errored");
+      e.printStackTrace();
     }
-    Interface.setStatus("Idle");
   }
 
   @Override
   public String commandTabbed(String commande) {
     for (String s : allCommandes)
       if (s.contains(commande))
-        return s + ";";
+        return s;
     return commande;
   }
 
@@ -97,7 +103,9 @@ public class CommandExecuter implements CommandListener {
     if(Flotte.getByName(args.get(0)) != null){
       if(Personne.getByName(args.get(1)) != null){
         if(!Flotte.getByName(args.get(0)).supprimerMembre(args.get(1)))
-          Flotte.getByName(args.get(0)).ajouterMembre(Personne.getByName(args.get(1)));
+          MiniProjet.log((Flotte.getByName(args.get(0)).ajouterMembre(Personne.getByName(args.get(1)))) ? "Votre membre a ete ajoute a l'equipage." : "Une erreur est survenue.");
+        else
+          MiniProjet.log("Votre membre a ete retire de l'equipage.");
       } else MiniProjet.log(args.get(1) + ": cette personne ne fait pas partie de votre personnel.");
     } else MiniProjet.log(args.get(0) + ": ce vaisseau ne fait pas partie de votre flotte.");
   }
@@ -108,6 +116,18 @@ public class CommandExecuter implements CommandListener {
   }
 
   public static void commandTransfert(String arg) {
+    if(arg.equals("all")) {
+      for(Agent a : Agent.getAll())
+        if(Matrice.getPos(a) == null)
+          Matrice.infiltrer(a);
+        else
+          Matrice.exfiltrer(a);
+      for(Personne l : Personne.getAll())
+        if(l instanceof Libere)
+          ((Libere)l).transfert();
+      return;
+    }
+
     if(Personne.getByName(arg) != null && Personne.getByName(arg) instanceof Libere) {
       int ret = ((Libere)Personne.getByName(arg)).transfert();
       if (ret == 1)
@@ -116,6 +136,8 @@ public class CommandExecuter implements CommandListener {
         MiniProjet.log("Votre membre libere a ete exfiltre.");
       else if (ret == 69)
         MiniProjet.log("Le vaisseau n'est pas securise ! Ajouter un operateur avant d'infiltrer son equipage.");
+      else if (ret == -69)
+        MiniProjet.log("Ce membre a ete infecte ! Vous ne pourrez pas le sortir de ce guepier.");
       else
         MiniProjet.log("L'operation a echoue. La matrice est peut-etre pleine.");
     } else {

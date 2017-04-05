@@ -67,8 +67,40 @@ public class Matrice {
     return true;
   }
 
+  /**
+   * calcule la distance entre un membre et un agent
+   * @param m le membre libéré
+   * @param a l'agent
+   * @return la distance entre les deux
+   */
+  public static double distanceAgent(Libere m, Agent a) {
+    return Math.sqrt(Math.pow((getPos(m).x - getPos(a).x),2) + Math.pow((getPos(m).y - getPos(a).y), 2));
+  }
 
+  /**
+   * détermine l'agent le plus proche du membre libéré
+   * @param m le membre libéré pour lequel la vérification est effectuée
+   */
+  public static Agent agentPlusProche(Libere m) {
+    Agent plusProche = null;
+    for (int x = 0; x < matrice.length; x++)
+      for (int y = 0; y < matrice.length; y++)
+        if(matrice[x][y] instanceof Agent)
+          if(plusProche == null || distanceAgent(m, (Agent)matrice[x][y]) < distanceAgent(m, plusProche))
+            plusProche = (Agent)matrice[x][y];
+    // System.out.println(plusProche);
+    return plusProche;
+  }
 
+  public static boolean testInfection(Libere l) {
+    if(agentPlusProche(l) == null)
+      return false;
+    // System.out.println((Matrice.agentPlusProche(l).getLvl() / distanceAgent(l, agentPlusProche(l))) > l.nbTransferts());
+    if ((agentPlusProche(l).getLvl() / distanceAgent(l, agentPlusProche(l))) > l.getNbTransferts())
+      return true;
+    agentPlusProche(l).sap();
+    return false;
+  }
 
   /**
    * Permet de connaître la position d'une personne dans la matrice
