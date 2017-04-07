@@ -2,21 +2,30 @@ package es.esy.ladysnake.miniprojet.main;
 
 import java.util.Random;
 import java.awt.Point;
+import javax.swing.JTable;
 
 /**
  * La matrice.
  * Note : Il n'est pas possible de créer des instances de cette classe.
  */
 public class Matrice {
-  private static Object[][] matrice = new Object[10][10];
+  public static final int MAX_X = 10, MAX_Y = 10;
+  private static Object[][] matrice = new Object[MAX_X][MAX_Y];
+
+  public static JTable getMatrixView() {
+    Object[] header = new Integer[MAX_X];
+    for (int i = 0; i < MAX_X; i++)
+      header[i] = i;
+    return new JTable(matrice, header);
+  }
 
   /**
    * Indique si la matrice est pleine
    * @return vrai si la matrix est pleine
    */
   public static boolean isFull() {
-    for (int i = 0; i < 10; i++)
-      for (int j = 0; j < 10; j++)
+    for (int i = 0; i < MAX_X; i++)
+      for (int j = 0; j < MAX_Y; j++)
         if (matrice[i][j] == null)
           return false;
     return true;
@@ -108,8 +117,8 @@ public class Matrice {
    * @return les coordonnées de la personne sous forme de point, ou null si la personne n'est pas présente.
    */
   public static Point getPos (Object ag) {
-    for (int i = 0; i < 10; i++)
-      for (int j = 0; j < 10; j++)
+    for (int i = 0; i < MAX_X; i++)
+      for (int j = 0; j < MAX_Y; j++)
         if (matrice[i][j] == ag)
           return new Point(i, j);
     return null;

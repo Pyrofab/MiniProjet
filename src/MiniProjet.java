@@ -4,10 +4,12 @@ import es.esy.ladysnake.gui.CommandListener;
 import es.esy.ladysnake.gui.Interface;
 import es.esy.ladysnake.miniprojet.display.MatrixDisplay;
 import es.esy.ladysnake.miniprojet.display.CommandExecuter;
+import es.esy.ladysnake.miniprojet.display.FancyInterface;
 import java.util.List;
 
 public class MiniProjet {
   public static final MatrixDisplay matrixDisp;
+  public static final FancyInterface f = new FancyInterface();
 
   static {
     matrixDisp = new MatrixDisplay();

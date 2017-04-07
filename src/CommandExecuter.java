@@ -56,7 +56,7 @@ public class CommandExecuter implements CommandListener {
       }
       Interface.setStatus("Idle");
     } catch (Exception e){
-      MiniProjet.log("Une erreur est survenue");
+      MiniProjet.log("Une erreur est survenue. Merci de bien vouloir en informer le groupe responsable.\n" + e.getMessage());
       Interface.setStatus("Errored");
       e.printStackTrace();
     }
