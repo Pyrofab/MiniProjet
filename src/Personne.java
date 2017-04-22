@@ -11,6 +11,18 @@ public abstract class Personne {
   private String grade;
   protected Vaisseau vaisseau;
   private static ArrayList<Personne> gens = new ArrayList<Personne>();
+  private static final JList<Personne> jgens;
+
+  static {
+    private ListModel model = new DefaultListModel(gens)
+  {
+    public boolean isCellEditable(int row, int column)
+    {
+      return false;//This causes all cells to be not editable
+    }
+  };
+  jgens = new JList(model);
+  }
 
   /**
    * Constructeur de la classe Personne

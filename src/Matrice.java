@@ -11,12 +11,29 @@ import javax.swing.JTable;
 public class Matrice {
   public static final int MAX_X = 10, MAX_Y = 10;
   private static Object[][] matrice = new Object[MAX_X][MAX_Y];
+  private static TableModel model;
+  private static JTable jmatrice;
 
-  public static JTable getMatrixView() {
-    Object[] header = new Integer[MAX_X];
+  static {
+
+    Object[] columnNames = new Integer[MAX_X];
     for (int i = 0; i < MAX_X; i++)
       header[i] = i;
-    return new JTable(matrice, header);
+    model = new DefaultTableModel(matrice, columnNames)
+    {
+      public boolean isCellEditable(int row, int column)
+      {
+        return false;//This causes all cells to be not editable
+      }
+    };
+   jmatrice = new JTable(model);
+  }
+  /**
+   * Crée une représentation de la matrice
+   * @return la JTable représentant la matrice
+   */
+  public static JTable getMatrixView() {
+    return jmatrice;
   }
 
   /**
