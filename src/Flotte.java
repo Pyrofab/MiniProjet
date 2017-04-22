@@ -1,12 +1,26 @@
 package es.esy.ladysnake.miniprojet.main;
 
 import java.util.ArrayList;
+import javax.swing.ListModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 /**
  * Une classe décrivant la flotte de Sion
  */
 public class Flotte{
   private static ArrayList<Vaisseau> flotte = new ArrayList<Vaisseau>();
+  private static final JList<Vaisseau> jflotte;
+  private static ListModel<Vaisseau> model;
+
+  static {
+    model = new DefaultListModel<Vaisseau>();
+    jflotte = new JList<Vaisseau>(model);
+  }
+
+  public static JList getFlotteView() {
+    return jflotte;
+  }
 
   /**
    * Ajoute un Vaisseau à cette flotte.
@@ -14,6 +28,7 @@ public class Flotte{
    */
   public static void ajouterVaisseau(Vaisseau v) {
     flotte.add(v);
+    ((DefaultListModel<Vaisseau>)model).addElement(v);
   }
 
   /**

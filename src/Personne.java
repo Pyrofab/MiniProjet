@@ -1,6 +1,9 @@
 package es.esy.ladysnake.miniprojet.main;
 
 import java.util.ArrayList;
+import javax.swing.ListModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 /**
  * Classe décrivant un membre de Sion
@@ -12,16 +15,21 @@ public abstract class Personne {
   protected Vaisseau vaisseau;
   private static ArrayList<Personne> gens = new ArrayList<Personne>();
   private static final JList<Personne> jgens;
+  private static ListModel<Personne> model;
 
   static {
-    private ListModel model = new DefaultListModel(gens)
-  {
-    public boolean isCellEditable(int row, int column)
+    model = new DefaultListModel<Personne>()
     {
-      return false;//This causes all cells to be not editable
-    }
-  };
-  jgens = new JList(model);
+      public boolean isCellEditable(int row)
+      {
+        return false;//This causes all cells to be not editable
+      }
+    };
+    jgens = new JList<Personne>(model);
+  }
+
+  public static JList getPersonnelView() {
+    return jgens;
   }
 
   /**
@@ -35,6 +43,7 @@ public abstract class Personne {
     this.sexe = s;
     this.grade = g;
     gens.add(this);
+    ((DefaultListModel<Personne>)model).addElement(this);
   }
 
   /**

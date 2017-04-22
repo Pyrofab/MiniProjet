@@ -51,9 +51,8 @@ public class MatrixDisplay extends JPanel implements Runnable, ActionListener {
    */
   @Override
   public void run() {
-    while (true) {
+    shouldRun = true;
       while (shouldRun) {
-        // System.out.print("l");
         try {
           this.repaint();
         } catch (Exception e) {
@@ -64,7 +63,7 @@ public class MatrixDisplay extends JPanel implements Runnable, ActionListener {
           Thread.sleep(16);
         } catch (InterruptedException e) {   }
       }
-    }
+      Interface.swapPanel();
   }
 
   /**
@@ -74,7 +73,6 @@ public class MatrixDisplay extends JPanel implements Runnable, ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     shouldRun = false;
-    Interface.swapPanel();
   }
 
   /**

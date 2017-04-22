@@ -3,6 +3,7 @@ package es.esy.ladysnake.miniprojet.main;
 import java.util.Random;
 import java.awt.Point;
 import javax.swing.JTable;
+import javax.swing.table.*;
 
 /**
  * La matrice.
@@ -18,15 +19,28 @@ public class Matrice {
 
     Object[] columnNames = new Integer[MAX_X];
     for (int i = 0; i < MAX_X; i++)
-      header[i] = i;
+      columnNames[i] = i;
+
     model = new DefaultTableModel(matrice, columnNames)
     {
       public boolean isCellEditable(int row, int column)
       {
-        return false;//This causes all cells to be not editable
+        return false;
+      }
+
+      public Object getValueAt(int row, int col) {
+        if(matrice[row][col] instanceof Libere) {
+          Libere l = ((Libere)matrice[row][col]);
+          return ((l.estInfecte() ? "m" : "M") + " (" + l.getNom() + ")");
+        }
+        if(matrice[row][col] instanceof Agent) {
+          Agent a = ((Agent)matrice[row][col]);
+          return "A" + a.getLvl();
+        }
+        return "";
       }
     };
-   jmatrice = new JTable(model);
+    jmatrice = new JTable(model);
   }
   /**
    * Crée une représentation de la matrice
@@ -76,6 +90,7 @@ public class Matrice {
         y = rand.nextInt(9);
       } while (matrice[x][y] != null);
       matrice[x][y] = p;
+      //jmatrice.setValueAt(p, x, y);
       return true;
     }
     return false;
@@ -90,6 +105,7 @@ public class Matrice {
     if(matrice[getPos(p).x][getPos(p).y] == null)
       return false;
     matrice[getPos(p).x][getPos(p).y] = null;
+    //jmatrice.setValueAt(null, getPos(p).x, getPos(p).y);
     return true;
   }
 

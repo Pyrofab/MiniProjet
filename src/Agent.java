@@ -2,6 +2,9 @@ package es.esy.ladysnake.miniprojet.main;
 
 import java.util.Random;
 import java.util.ArrayList;
+import javax.swing.ListModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 /**
  * Classe décrivant un agent au service des machines
@@ -10,6 +13,23 @@ public class Agent {
   private int lvl;
   public final int id;
   private static ArrayList<Agent> machineForces = new ArrayList<Agent>();
+  private static final JList<Agent> jmachines;
+  private static ListModel<Agent> model;
+
+  static {
+    model = new DefaultListModel<Agent>()
+    {
+      public boolean isCellEditable(int row)
+      {
+        return false;//This causes all cells to be not editable
+      }
+    };
+    jmachines = new JList<Agent>(model);
+  }
+
+  public static JList getPersonnelView() {
+    return jmachines;
+  }
 
   /**
    * Constructeur de la classe Agent
@@ -20,6 +40,7 @@ public class Agent {
     lvl = rand.nextInt(5);
     machineForces.add(this);
     this.id = machineForces.indexOf(this);
+    ((DefaultListModel<Agent>)model).addElement(this);
   }
 
   /**

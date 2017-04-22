@@ -73,7 +73,6 @@ public class CommandExecuter implements CommandListener {
   public static void commandHelp() {
     for(String str : allCommandes)
       MiniProjet.log(str + ": " + doc.get(str) + "\n");
-    MiniProjet.log("(astuce: vous pouvez presser la touche 'ctrl' pour autocompleter votre commande !)");
   }
 
   public static void commandHelp(String arg) {
@@ -83,11 +82,11 @@ public class CommandExecuter implements CommandListener {
   }
 
   public static void commandAjouterVaisseau (List <String> args) {
-    if(Flotte.getByName(args.get(0)) == null) {
+    if(Flotte.getByName(args.get(0)) != null) {
       MiniProjet.log("Un vaisseau portant le meme nom existe deja.");
       return;
     }
-    Flotte.ajouterVaisseau(new Vaisseau(args.get(1), args.get(2)));
+    Flotte.ajouterVaisseau(new Vaisseau(args.get(0), args.get(1)));
     MiniProjet.log("Vaisseau ajoute !");
   }
 
@@ -112,7 +111,7 @@ public class CommandExecuter implements CommandListener {
 
   public static void commandMortaugui() {
     Interface.swapPanel(MiniProjet.matrixDisp);
-    MiniProjet.matrixDisp.shouldRun = true;
+    (new Thread(MiniProjet.matrixDisp)).start();
   }
 
   public static void commandTransfert(String arg) {

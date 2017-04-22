@@ -2,6 +2,7 @@ package es.esy.ladysnake.gui;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -166,25 +167,20 @@ public class Interface {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String s = inputField.getText();
-			// if(s.isEmpty() || s.indexOf(';') < 0)
-			// 	return;
-			journal.add(s);
+			if(s.length() <= 0) return;
 			ArrayList<String> commande = new ArrayList<String>();
-			int index = 0, argIndex = 0;
-			do {
-				commande.clear();
-				argIndex = index;
-				index = (s.contains(";")) ? s.indexOf(';', index) + 1 : s.length();
-				while(s.indexOf(' ', argIndex) < index && s.indexOf(' ', argIndex) > argIndex) {
-					commande.add(s.substring(argIndex, s.indexOf(' ', argIndex)).trim());
-					argIndex = s.indexOf(' ', argIndex) + 1;
+			journal.add(s);
+			Scanner sc = new Scanner(s);
+			try {
+				while(sc.hasNext()) {
+					commande.add(sc.next().trim());
 				}
-				commande.add(s.substring(argIndex, index - ((s.contains(";")) ? 1 : 0)).trim());
-				for(CommandListener l1 : listeners)
-					l1.commandEntered(commande);
-			} while (index < s.lastIndexOf(';'));
+			} catch(Exception ex) {}
+			for(CommandListener l1 : listeners)
+				l1.commandEntered(commande);
 			inputField.setText("");
 			indiceJournal = 0;
+			sc.close();
 		}
 
 		@Override

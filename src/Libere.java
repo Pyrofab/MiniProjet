@@ -38,7 +38,6 @@ public class Libere extends Personne {
         this.nbTransferts++;
         this.infiltre = true;
         this.infecte = Matrice.testInfection(this);
-        System.out.println(this.infecte);
         return 1;     //l'infiltration a réussi
       } else {
         return 69;        //son vaisseau n'est pas sécurisé
