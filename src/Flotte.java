@@ -18,6 +18,9 @@ public class Flotte{
     jflotte = new JList<Vaisseau>(model);
   }
 
+  /**
+   * @return une représentation graphique de cette flotte
+   */
   public static JList getFlotteView() {
     return jflotte;
   }

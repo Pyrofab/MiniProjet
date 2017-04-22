@@ -24,7 +24,7 @@ import javax.swing.UIManager;
 import javax.swing.text.DefaultCaret;
 
 /**
- * A simple GUI used to display text messages from the application.
+ * Un GUI simple utilisé pour agir textuellement avec l'application.
  * Sends CommandEntered events to the listeners. (objects that implements the CommandListener interface)
  */
 public class Interface {
@@ -33,26 +33,26 @@ public class Interface {
 	private static List<CommandListener> listeners = new ArrayList<CommandListener>();
 
 	/**
-	 * Adds the object to the interface's listeners
-	 * @param toAdd an implementation on the CommandListener interface
+	 * Ajoute un objet aux listeners de cette interface
+	 * @param toAdd une implémentation de l'interface CommandListener
 	 */
 	public static void addCommandListener(CommandListener toAdd){
 			listeners.add(toAdd);
 	}
 
 	/**
-	 * Open the interface
-	 * @param title the title this interface will display
-	 * @param buttonTitle the confirmation button's displayed text
-	 * @param labelText the hint displayed next to this interface's textField
+	 * Ouvre l'interface
+	 * @param title Le titre que cette fenêtre affichera
+	 * @param buttonTitle le texte affiché à côté du bouton de confirmation
+	 * @param labelText l'indicateur affiché à côté de l'input
 	 */
 	public static void openInterface(String title, String buttonTitle, String labelText) {
 		frame = new Frame(title, buttonTitle, labelText);
 	}
 
 	/**
-	 * Add a line to the log area
-	 * @param s the String to display
+	 * Ajoute une ligne à la zone de log
+	 * @param s la String à afficher
 	 */
 	public static void addLogLine(String s) {
 		if(frame != null) {
@@ -62,7 +62,7 @@ public class Interface {
 	}
 
 	/**
-	 * Clear the log area
+	 * Vide la zone de log
 	 */
 	public static void clear(){
 		if(frame != null) {
@@ -71,8 +71,8 @@ public class Interface {
 	}
 
 	/**
-	 * Changes the status displayed at the bottom of the interface
-	 * @param status the status to display
+	 * Change le status affiché en bas de l'interface
+	 * @param status le status à afficher
 	 */
 	public static void setStatus(String status) {
 		if(frame != null)
@@ -80,15 +80,15 @@ public class Interface {
 	}
 
 	/**
-	 * Swaps the Interface's panel with the default one
+	 * Echange le panneau de l'interface avec celui par défaut
 	 */
 	public static void swapPanel() {
 		frame.setContentPane(frame.panel);
 	}
 
 	/**
-	 * Swaps the Interface's panel with the one provided in the parameters
-	 * @param newPanel the JPanel for this frame
+	 * Echange le panneau de l'interface avec celui fourni en paramètre
+	 * @param newPanel le JPanel pour cette fenêtre
 	 */
 	public static void swapPanel(JPanel newPanel) {
 		frame.setContentPane(newPanel);

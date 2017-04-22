@@ -84,8 +84,6 @@ public class Vaisseau {
     for (Personne m : equipage){
       if(m != null && m instanceof Operateur)
         return true;
-      if(m != null)
-        System.out.println(m.getClass().toString());
       }
     return false;
   }

@@ -134,6 +134,11 @@ public class Matrice {
     return plusProche;
   }
 
+  /**
+   * Test si le libéré passé en paramètre est infecté par un agent proche
+   * @param l le membre libéré à tester
+   * @return si l'infection a eu lieu
+   */
   public static boolean testInfection(Libere l) {
     if(agentPlusProche(l) == null)
       return false;

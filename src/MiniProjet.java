@@ -43,6 +43,9 @@ public class MiniProjet {
      }
   }
 
+  /**
+   * Effectue quelques opérations démontrant les diverses fonctionnalités du programme
+   */
   public static void autoPlay() {
     Libere m = new Libere("Neo", 'm', "Lieutenant");
     Vaisseau v = new Vaisseau("Nebuchadnezzar", "Hovercraft");
@@ -66,13 +69,17 @@ public class MiniProjet {
     }
   }
 
-  public static void log (List<String> args) {
-    for (String arg : args)
+  public static void log (List args) {
+    for (Object arg : args)
       log(arg);
   }
 
-  public static void log (String s) {
-    Interface.addLogLine(s);
+  /**
+   * Affiche l'objet passé en paramètre dans l'interface et dans la console
+   * @param s l'objet à afficher
+   */
+  public static void log (Object s) {
+    Interface.addLogLine(s.toString());
     System.out.println(s);
   }
 }

@@ -47,7 +47,7 @@ public class MatrixDisplay extends JPanel implements Runnable, ActionListener {
 
   /**
    * Rafraichissement de l'affichage de la matrice 60 fois par seconde
-   * Les autres classes peuvent utiliser shouldRun pour activer ou desactiver le rafraichissement
+   * Les autres classes peuvent utiliser shouldRun pour desactiver le rafraichissement
    */
   @Override
   public void run() {
@@ -56,7 +56,7 @@ public class MatrixDisplay extends JPanel implements Runnable, ActionListener {
         try {
           this.repaint();
         } catch (Exception e) {
-          e.printStackTrace();
+          //e.printStackTrace();
           actionPerformed(null);
         }
         try {

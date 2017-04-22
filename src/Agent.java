@@ -27,6 +27,9 @@ public class Agent {
     jmachines = new JList<Agent>(model);
   }
 
+  /**
+   * @return la représentation graphique de l'intégralité des agents
+   */
   public static JList getPersonnelView() {
     return jmachines;
   }
@@ -54,6 +57,9 @@ public class Agent {
     return null;
   }
 
+  /**
+   * @return La totalité des forces des machines
+   */
   public static ArrayList<Agent> getAll() {
     return machineForces;
   }
